@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+
 import { createRoot } from "react-dom/client";
 import {
   Bot,
@@ -219,6 +219,7 @@ function App() {
   const [experienceOpen, setExperienceOpen] = useState(false);
 
 
+
   // ====================================================
   // LOAD PROFILE
   // ====================================================
@@ -246,6 +247,58 @@ function App() {
     const message = text.trim();
 
     if (!message || loading) return;
+
+    // Show live GitHub dashboard when the user asks about GitHub
+    if (message.toLowerCase().includes("github")) {
+      const nextMessages = [
+        ...messages,
+        {
+          role: "user",
+          content: message,
+        },
+      ];
+
+      setMessages(nextMessages);
+      setInput("");
+      setLoading(true);
+
+      try {
+        const response = await fetch(`${API}/api/github`);
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(
+            data.error || "Unable to fetch live GitHub data."
+          );
+        }
+
+        setMessages([
+          ...nextMessages,
+          {
+            role: "assistant",
+            type: "github",
+            data,
+            content: "Here is Rohan's live GitHub profile.",
+          },
+        ]);
+      } catch (error) {
+        console.error("GitHub loading error:", error);
+
+        setMessages([
+          ...nextMessages,
+          {
+            role: "assistant",
+            content:
+              error?.message ||
+              "I can't load the live GitHub profile right now.",
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+
+      return;
+    }
 
     // Show live LeetCode dashboard when the user asks about LeetCode
     if (message.toLowerCase().includes("leetcode")) {
@@ -1063,7 +1116,261 @@ function App() {
 
                   <div className="bubble">
 
-                    {message.type === "leetcode" ? (
+                    {message.type === "github" ? (
+                      <div
+                        style={{
+                          width: "100%",
+                          maxWidth: "760px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "16px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            padding: "18px",
+                            border: "1px solid #2b2b34",
+                            borderRadius: "16px",
+                            background:
+                              "linear-gradient(145deg, rgba(18,18,24,.98), rgba(13,13,18,.98))",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              gap: "16px",
+                              flexWrap: "wrap",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "12px",
+                              }}
+                            >
+                              <img
+                                src={message.data?.profile?.avatar}
+                                alt="Rohan Karak"
+                                style={{
+                                  width: "52px",
+                                  height: "52px",
+                                  borderRadius: "14px",
+                                  objectFit: "cover",
+                                  border: "1px solid #3a3748",
+                                }}
+                              />
+
+                              <div>
+                                <div
+                                  style={{
+                                    fontSize: "18px",
+                                    fontWeight: 700,
+                                    color: "#fff",
+                                  }}
+                                >
+                                  {message.data?.profile?.name ||
+                                    "Rohan Karak"}
+                                </div>
+
+                                <div
+                                  style={{
+                                    marginTop: "4px",
+                                    color: "#9696a3",
+                                    fontSize: "13px",
+                                  }}
+                                >
+                                  @{message.data?.profile?.username}
+                                </div>
+                              </div>
+                            </div>
+
+                            <a
+                              href={message.data?.profile?.profileUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="chat-link"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              View GitHub Profile{" "}
+                              <ExternalLink size={12} />
+                            </a>
+                          </div>
+
+                          {message.data?.profile?.bio && (
+                            <p
+                              style={{
+                                margin: "14px 0 0",
+                                color: "#aaaab6",
+                                fontSize: "13px",
+                                lineHeight: 1.7,
+                              }}
+                            >
+                              {message.data.profile.bio}
+                            </p>
+                          )}
+                        </div>
+
+                        <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns:
+                              "repeat(3, minmax(0, 1fr))",
+                            gap: "10px",
+                          }}
+                        >
+                          {[
+                            [
+                              "Repositories",
+                              message.data?.profile?.publicRepos ?? 0,
+                            ],
+                            [
+                              "Followers",
+                              message.data?.profile?.followers ?? 0,
+                            ],
+                            [
+                              "Following",
+                              message.data?.profile?.following ?? 0,
+                            ],
+                          ].map(([label, value]) => (
+                            <div
+                              key={label}
+                              style={{
+                                padding: "16px 12px",
+                                border: "1px solid #292932",
+                                borderRadius: "14px",
+                                background: "#111116",
+                                textAlign: "center",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  fontSize: "24px",
+                                  fontWeight: 750,
+                                  color: "#a99cff",
+                                }}
+                              >
+                                {value}
+                              </div>
+
+                              <div
+                                style={{
+                                  marginTop: "5px",
+                                  fontSize: "11px",
+                                  color: "#858591",
+                                }}
+                              >
+                                {label}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div
+                          style={{
+                            padding: "18px",
+                            border: "1px solid #292932",
+                            borderRadius: "14px",
+                            background: "#111116",
+                          }}
+                        >
+                          <div
+                            style={{
+                              fontSize: "15px",
+                              fontWeight: 700,
+                              marginBottom: "12px",
+                            }}
+                          >
+                            📦 Recent Repositories
+                          </div>
+
+                          {message.data?.repositories?.length ? (
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "8px",
+                              }}
+                            >
+                              {message.data.repositories.map((repo) => (
+                                <a
+                                  key={repo.name}
+                                  href={repo.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    gap: "12px",
+                                    padding: "12px",
+                                    borderRadius: "10px",
+                                    border: "1px solid #24242c",
+                                    background: "#14141a",
+                                    color: "#d8d8df",
+                                    textDecoration: "none",
+                                  }}
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <div style={{ minWidth: 0 }}>
+                                    <div
+                                      style={{
+                                        fontSize: "13px",
+                                        fontWeight: 700,
+                                        color: "#f0f0f5",
+                                      }}
+                                    >
+                                      {repo.name}
+                                    </div>
+
+                                    {repo.description && (
+                                      <div
+                                        style={{
+                                          marginTop: "4px",
+                                          color: "#858591",
+                                          fontSize: "11px",
+                                          lineHeight: 1.5,
+                                        }}
+                                      >
+                                        {repo.description}
+                                      </div>
+                                    )}
+
+                                    <div
+                                      style={{
+                                        marginTop: "6px",
+                                        color: "#a99cff",
+                                        fontSize: "11px",
+                                      }}
+                                    >
+                                      {repo.language || "Code"} · ⭐{" "}
+                                      {repo.stars ?? 0} · Forks{" "}
+                                      {repo.forks ?? 0}
+                                    </div>
+                                  </div>
+
+                                  <ExternalLink
+                                    size={12}
+                                    style={{ flexShrink: 0 }}
+                                  />
+                                </a>
+                              ))}
+                            </div>
+                          ) : (
+                            <div
+                              style={{
+                                color: "#777783",
+                                fontSize: "12px",
+                              }}
+                            >
+                              No repository data returned by GitHub.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ) : message.type === "leetcode" ? (
                       <div
                         style={{
                           width: "100%",

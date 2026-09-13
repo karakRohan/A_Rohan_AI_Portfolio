@@ -43,6 +43,8 @@ const client = process.env.GROQ_API_KEY
 
 const LEETCODE_USERNAME = "Code_Rider42";
 
+const GITHUB_USERNAME = "karakRohan";
+
 const LEETCODE_GRAPHQL_URL =
   "https://leetcode.com/graphql/";
 
@@ -67,6 +69,92 @@ app.get("/api/health", (_req, res) => {
 
 app.get("/api/profile", (_req, res) => {
   res.json(knowledge.profile);
+});
+
+// ======================================================
+// LIVE GITHUB DATA
+// ======================================================
+
+app.get("/api/github", async (_req, res) => {
+  try {
+    const response = await fetch(
+      `https://api.github.com/users/${GITHUB_USERNAME}`,
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "Rohan-AI-Portfolio",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `GitHub returned HTTP ${response.status}`
+      );
+    }
+
+    const profile = await response.json();
+
+    const reposResponse = await fetch(
+      `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=10`,
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "Rohan-AI-Portfolio",
+        },
+      }
+    );
+
+    if (!reposResponse.ok) {
+      throw new Error(
+        `GitHub repositories returned HTTP ${reposResponse.status}`
+      );
+    }
+
+    const repos = await reposResponse.json();
+
+    res.json({
+      success: true,
+
+      fetchedAt:
+        new Date().toISOString(),
+
+      profile: {
+        username: profile.login,
+        name: profile.name,
+        avatar: profile.avatar_url,
+        bio: profile.bio,
+        publicRepos: profile.public_repos,
+        followers: profile.followers,
+        following: profile.following,
+        profileUrl: profile.html_url,
+      },
+
+      repositories: repos.map(
+        (repo) => ({
+          name: repo.name,
+          description: repo.description,
+          language: repo.language,
+          stars: repo.stargazers_count,
+          forks: repo.forks_count,
+          url: repo.html_url,
+          updatedAt: repo.updated_at,
+        })
+      ),
+    });
+  } catch (error) {
+    console.error(
+      "GITHUB ERROR:",
+      error
+    );
+
+    res.status(500).json({
+      success: false,
+      error:
+        error?.message ||
+        "Failed to fetch GitHub data.",
+    });
+  }
 });
 
 // ======================================================
@@ -140,17 +228,25 @@ app.get("/api/leetcode", async (_req, res) => {
         method: "POST",
 
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type":
+            "application/json",
+
           "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153.0.0.0 Safari/537.36",
-          Referer: "https://leetcode.com/",
-          Origin: "https://leetcode.com",
+
+          Referer:
+            "https://leetcode.com/",
+
+          Origin:
+            "https://leetcode.com",
         },
 
         body: JSON.stringify({
           query,
+
           variables: {
-            username: LEETCODE_USERNAME,
+            username:
+              LEETCODE_USERNAME,
           },
         }),
       }
@@ -162,7 +258,8 @@ app.get("/api/leetcode", async (_req, res) => {
       );
     }
 
-    const result = await response.json();
+    const result =
+      await response.json();
 
     // --------------------------------------------------
     // GRAPHQL ERROR
@@ -176,19 +273,23 @@ app.get("/api/leetcode", async (_req, res) => {
 
       return res.status(500).json({
         success: false,
+
         error:
-          result.errors?.[0]?.message ||
+          result.errors?.[0]
+            ?.message ||
           "LeetCode GraphQL request failed.",
       });
     }
 
     const data = result.data;
 
-    const user = data?.matchedUser;
+    const user =
+      data?.matchedUser;
 
     if (!user) {
       return res.status(404).json({
         success: false,
+
         error:
           `LeetCode user "${LEETCODE_USERNAME}" was not found.`,
       });
@@ -199,10 +300,12 @@ app.get("/api/leetcode", async (_req, res) => {
     // ==================================================
 
     const solvedStats =
-      user.submitStats?.acSubmissionNum || [];
+      user.submitStats
+        ?.acSubmissionNum || [];
 
     const submissionStats =
-      user.submitStats?.totalSubmissionNum || [];
+      user.submitStats
+        ?.totalSubmissionNum || [];
 
     const findStat = (
       list,
@@ -211,7 +314,8 @@ app.get("/api/leetcode", async (_req, res) => {
       return (
         list.find(
           (item) =>
-            item.difficulty === difficulty
+            item.difficulty ===
+            difficulty
         ) || {
           difficulty,
           count: 0,
@@ -220,45 +324,53 @@ app.get("/api/leetcode", async (_req, res) => {
       );
     };
 
-    const solvedAll = findStat(
-      solvedStats,
-      "All"
-    );
+    const solvedAll =
+      findStat(
+        solvedStats,
+        "All"
+      );
 
-    const solvedEasy = findStat(
-      solvedStats,
-      "Easy"
-    );
+    const solvedEasy =
+      findStat(
+        solvedStats,
+        "Easy"
+      );
 
-    const solvedMedium = findStat(
-      solvedStats,
-      "Medium"
-    );
+    const solvedMedium =
+      findStat(
+        solvedStats,
+        "Medium"
+      );
 
-    const solvedHard = findStat(
-      solvedStats,
-      "Hard"
-    );
+    const solvedHard =
+      findStat(
+        solvedStats,
+        "Hard"
+      );
 
-    const submissionsAll = findStat(
-      submissionStats,
-      "All"
-    );
+    const submissionsAll =
+      findStat(
+        submissionStats,
+        "All"
+      );
 
-    const submissionsEasy = findStat(
-      submissionStats,
-      "Easy"
-    );
+    const submissionsEasy =
+      findStat(
+        submissionStats,
+        "Easy"
+      );
 
-    const submissionsMedium = findStat(
-      submissionStats,
-      "Medium"
-    );
+    const submissionsMedium =
+      findStat(
+        submissionStats,
+        "Medium"
+      );
 
-    const submissionsHard = findStat(
-      submissionStats,
-      "Hard"
-    );
+    const submissionsHard =
+      findStat(
+        submissionStats,
+        "Hard"
+      );
 
     // ==================================================
     // TOTAL QUESTIONS ON LEETCODE
@@ -298,21 +410,27 @@ app.get("/api/leetcode", async (_req, res) => {
     // ==================================================
 
     const contest =
-      data?.userContestRanking || null;
+      data?.userContestRanking ||
+      null;
 
     // ==================================================
     // RECENT ACCEPTED SUBMISSIONS
     // ==================================================
 
     const recentSubmissions =
-      data?.recentAcSubmissionList || [];
+      data?.recentAcSubmissionList ||
+      [];
 
     const formattedRecentSubmissions =
       recentSubmissions.map(
         (submission) => ({
           id: submission.id,
-          title: submission.title,
-          slug: submission.titleSlug,
+
+          title:
+            submission.title,
+
+          slug:
+            submission.titleSlug,
 
           url:
             `https://leetcode.com/problems/${submission.titleSlug}/`,
@@ -320,13 +438,14 @@ app.get("/api/leetcode", async (_req, res) => {
           timestamp:
             submission.timestamp,
 
-          date: submission.timestamp
-            ? new Date(
-                Number(
-                  submission.timestamp
-                ) * 1000
-              ).toISOString()
-            : null,
+          date:
+            submission.timestamp
+              ? new Date(
+                  Number(
+                    submission.timestamp
+                  ) * 1000
+                ).toISOString()
+              : null,
         })
       );
 
@@ -338,9 +457,15 @@ app.get("/api/leetcode", async (_req, res) => {
       (user.badges || []).map(
         (badge) => ({
           id: badge.id,
-          name: badge.displayName,
-          icon: badge.icon,
-          date: badge.creationDate,
+
+          name:
+            badge.displayName,
+
+          icon:
+            badge.icon,
+
+          date:
+            badge.creationDate,
         })
       );
 
@@ -453,31 +578,35 @@ app.get("/api/leetcode", async (_req, res) => {
 // AI CHAT
 // ======================================================
 
-app.post("/api/chat", async (req, res) => {
-  try {
-    const {
-      message,
-      history = [],
-    } = req.body;
+app.post(
+  "/api/chat",
+  async (req, res) => {
+    try {
+      const {
+        message,
+        history = [],
+      } = req.body;
 
-    if (
-      !message ||
-      !message.trim()
-    ) {
-      return res.status(400).json({
-        error:
-          "Message is required.",
-      });
-    }
+      if (
+        !message ||
+        !message.trim()
+      ) {
+        return res.status(400).json({
+          error:
+            "Message is required.",
+        });
+      }
 
-    if (!process.env.GROQ_API_KEY) {
-      return res.status(500).json({
-        error:
-          "GROQ_API_KEY is not configured. Please check backend/.env",
-      });
-    }
+      if (
+        !process.env.GROQ_API_KEY
+      ) {
+        return res.status(500).json({
+          error:
+            "GROQ_API_KEY is not configured. Please check backend/.env",
+        });
+      }
 
-    const systemPrompt = `
+      const systemPrompt = `
 You are Rohan AI, the personal AI representative of Rohan Karak.
 
 Your job is to answer questions about Rohan.
@@ -529,74 +658,76 @@ ${JSON.stringify(
 )}
 `;
 
-    const messages = [
-      {
-        role: "system",
-        content: systemPrompt,
-      },
-
-      ...history
-        .slice(-8)
-        .map((item) => ({
-          role:
-            item.role ===
-            "assistant"
-              ? "assistant"
-              : "user",
-
-          content:
-            String(
-              item.content
-            ),
-        })),
-
-      {
-        role: "user",
-        content: message,
-      },
-    ];
-
-    const completion =
-      await client.chat.completions.create(
+      const messages = [
         {
-          model: MODEL,
+          role: "system",
+          content:
+            systemPrompt,
+        },
 
-          messages,
+        ...history
+          .slice(-8)
+          .map((item) => ({
+            role:
+              item.role ===
+              "assistant"
+                ? "assistant"
+                : "user",
 
-          temperature: 0.3,
+            content:
+              String(
+                item.content
+              ),
+          })),
 
-          max_tokens: 800,
-        }
+        {
+          role: "user",
+          content: message,
+        },
+      ];
+
+      const completion =
+        await client.chat.completions.create(
+          {
+            model: MODEL,
+
+            messages,
+
+            temperature: 0.3,
+
+            max_tokens: 800,
+          }
+        );
+
+      const answer =
+        completion
+          .choices?.[0]
+          ?.message?.content;
+
+      if (!answer) {
+        return res.status(500).json({
+          error:
+            "AI returned an empty response.",
+        });
+      }
+
+      res.json({
+        answer,
+      });
+    } catch (error) {
+      console.error(
+        "GROQ ERROR:",
+        error
       );
 
-    const answer =
-      completion
-        .choices?.[0]
-        ?.message?.content;
-
-    if (!answer) {
-      return res.status(500).json({
+      res.status(500).json({
         error:
-          "AI returned an empty response.",
+          error?.message ||
+          "Groq AI request failed.",
       });
     }
-
-    res.json({
-      answer,
-    });
-  } catch (error) {
-    console.error(
-      "GROQ ERROR:",
-      error
-    );
-
-    res.status(500).json({
-      error:
-        error?.message ||
-        "Groq AI request failed.",
-    });
   }
-});
+);
 
 // ======================================================
 // START SERVER
@@ -618,7 +749,15 @@ app.listen(
     );
 
     console.log(
+      `GitHub username: ${GITHUB_USERNAME}`
+    );
+
+    console.log(
       `LeetCode username: ${LEETCODE_USERNAME}`
+    );
+
+    console.log(
+      `GitHub API: http://localhost:${PORT}/api/github`
     );
 
     console.log(
