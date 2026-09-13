@@ -1,4 +1,4 @@
-
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Bot,
@@ -467,6 +467,12 @@ function App() {
             transform: scale(1);
             opacity: 1;
             box-shadow: 0 0 0 0 rgba(67, 209, 122, 0);
+          }
+        }
+
+        @media (max-width: 700px) {
+          .github-graphs {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>
@@ -1266,6 +1272,247 @@ function App() {
                               </div>
                             </div>
                           ))}
+                        </div>
+
+                        {/* GitHub Activity Graphs */}
+                        <div
+                          className="github-graphs"
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                            gap: "12px",
+                          }}
+                        >
+                          {[
+                            ["⭐ Stars", "stars"],
+                            ["🍴 Forks", "forks"],
+                          ].map(([title, key]) => {
+                            const repos = message.data?.repositories || [];
+                            const maxValue = Math.max(
+                              ...repos.map((repo) => Number(repo[key] || 0)),
+                              1
+                            );
+
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  padding: "18px",
+                                  border: "1px solid #292932",
+                                  borderRadius: "14px",
+                                  background: "#111116",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    fontSize: "14px",
+                                    fontWeight: 700,
+                                    marginBottom: "16px",
+                                    color: "#f1f1f5",
+                                  }}
+                                >
+                                  {title}
+                                </div>
+
+                                {repos.slice(0, 6).map((repo) => (
+                                  <div
+                                    key={`${key}-${repo.name}`}
+                                    style={{ marginBottom: "12px" }}
+                                  >
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        gap: "10px",
+                                        marginBottom: "5px",
+                                        fontSize: "10px",
+                                        color: "#9998a7",
+                                      }}
+                                    >
+                                      <span
+                                        style={{
+                                          overflow: "hidden",
+                                          textOverflow: "ellipsis",
+                                          whiteSpace: "nowrap",
+                                        }}
+                                      >
+                                        {repo.name}
+                                      </span>
+                                      <span
+                                        style={{
+                                          color: "#43d17a",
+                                          fontWeight: 700,
+                                        }}
+                                      >
+                                        {repo[key] ?? 0}
+                                      </span>
+                                    </div>
+
+                                    <div
+                                      style={{
+                                        width: "100%",
+                                        height: "7px",
+                                        borderRadius: "999px",
+                                        background: "#20252a",
+                                        overflow: "hidden",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          width: `${Math.max(
+                                            3,
+                                            (Number(repo[key] || 0) / maxValue) * 100
+                                          )}%`,
+                                          height: "100%",
+                                          borderRadius: "999px",
+                                          background:
+                                            "linear-gradient(90deg, #166534, #22c55e, #4ade80)",
+                                          boxShadow:
+                                            "0 0 10px rgba(34,197,94,.28)",
+                                          transition: "width .4s ease",
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                ))}
+
+                                {!repos.length && (
+                                  <div
+                                    style={{
+                                      color: "#777783",
+                                      fontSize: "12px",
+                                    }}
+                                  >
+                                    No GitHub data available.
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        <div
+                          style={{
+                            padding: "18px",
+                            border: "1px solid #292932",
+                            borderRadius: "14px",
+                            background: "#111116",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              gap: "10px",
+                              marginBottom: "16px",
+                            }}
+                          >
+                            <div
+                              style={{
+                                fontSize: "14px",
+                                fontWeight: 700,
+                                color: "#f1f1f5",
+                              }}
+                            >
+                              🟢 Repository Language Activity
+                            </div>
+
+                            <span
+                              style={{
+                                fontSize: "10px",
+                                color: "#43d17a",
+                              }}
+                            >
+                              Live GitHub Data
+                            </span>
+                          </div>
+
+                          {(() => {
+                            const repos = message.data?.repositories || [];
+                            const languageCounts = repos.reduce((acc, repo) => {
+                              const language = repo.language || "Other";
+                              acc[language] = (acc[language] || 0) + 1;
+                              return acc;
+                            }, {});
+
+                            const languages = Object.entries(languageCounts)
+                              .sort((a, b) => b[1] - a[1])
+                              .slice(0, 6);
+
+                            const maxLanguageCount = Math.max(
+                              ...languages.map(([, count]) => count),
+                              1
+                            );
+
+                            return languages.length ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: "11px",
+                                }}
+                              >
+                                {languages.map(([language, count]) => (
+                                  <div key={language}>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        marginBottom: "5px",
+                                        fontSize: "11px",
+                                        color: "#aaaab6",
+                                      }}
+                                    >
+                                      <span>{language}</span>
+                                      <span
+                                        style={{
+                                          color: "#43d17a",
+                                          fontWeight: 700,
+                                        }}
+                                      >
+                                        {count} repo{count > 1 ? "s" : ""}
+                                      </span>
+                                    </div>
+
+                                    <div
+                                      style={{
+                                        width: "100%",
+                                        height: "8px",
+                                        borderRadius: "999px",
+                                        background: "#20252a",
+                                        overflow: "hidden",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          width: `${Math.max(
+                                            4,
+                                            (count / maxLanguageCount) * 100
+                                          )}%`,
+                                          height: "100%",
+                                          borderRadius: "999px",
+                                          background:
+                                            "linear-gradient(90deg, #15803d, #22c55e, #86efac)",
+                                          boxShadow:
+                                            "0 0 12px rgba(34,197,94,.25)",
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <div
+                                style={{
+                                  color: "#777783",
+                                  fontSize: "12px",
+                                }}
+                              >
+                                No language data available.
+                              </div>
+                            );
+                          })()}
                         </div>
 
                         <div
