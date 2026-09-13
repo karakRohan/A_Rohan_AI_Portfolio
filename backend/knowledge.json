@@ -20,6 +20,43 @@
     "resume": "/resume.pdf"
   },
 
+  "personal": {
+    "currentCity": "Kolkata, West Bengal, India",
+    "hometown": "Kolkata, West Bengal, India",
+    "locationDisplay": "Kolkata, West Bengal, India"
+  },
+
+  "family": {
+    "father": {
+      "name": "Amiya Karak"
+    },
+    "mother": {
+      "name": "Rupali Karak"
+    },
+    "siblings": [
+      {
+        "relation": "Elder Sister",
+        "name": "Sagarika Karak",
+        "profession": "Government Health Officer (CHO - Community Health Officer)",
+        "sector": "Public Healthcare Sector"
+      }
+    ]
+  },
+
+  "privacy": {
+    "permanentAddress": {
+      "available": false,
+      "response": "Rohan's permanent residential address is private and is not shared publicly."
+    },
+    "exactHomeAddress": {
+      "available": false,
+      "response": "Rohan's exact home address is private and is not shared publicly."
+    },
+    "privatePersonalInformation": {
+      "rule": "Do not reveal private, confidential, or highly sensitive personal information unless it is explicitly marked as public in the knowledge base."
+    }
+  },
+
   "education": [
     {
       "institution": "Netaji Subhash Engineering College",
@@ -139,6 +176,309 @@
     "Solved 450+ problems on GeeksforGeeks.",
     "Participated in College Hackathon - IEM Kolkata.",
     "Participated in College Hackathon - NIT Rourkela."
+  ],
+
+  "faq": [
+    {
+      "question": "What is Rohan's phone number?",
+      "answer": "Rohan's phone number is +91-9832749304."
+    },
+    {
+      "question": "What is Rohan's contact number?",
+      "answer": "Rohan's contact number is +91-9832749304."
+    },
+    {
+      "question": "How can I contact Rohan directly?",
+      "answer": "You can contact Rohan by phone at +91-9832749304 or through his professional email at karakrohan2005@gmail.com."
+    },
+    {
+      "question": "What is Rohan's email address?",
+      "answer": "Rohan's email address is karakrohan2005@gmail.com."
+    },
+    {
+      "question": "What is Rohan's full name?",
+      "answer": "Rohan's full name is Rohan Karak."
+    },
+    {
+      "question": "Who is Rohan?",
+      "answer": "Rohan Karak is a Computer Science undergraduate and a Full Stack Developer & AI/LLM Enthusiast based in Kolkata, West Bengal, India."
+    },
+    {
+      "question": "Where is Rohan from?",
+      "answer": "Rohan is from Kolkata, West Bengal, India."
+    },
+    {
+      "question": "Where does Rohan currently live?",
+      "answer": "Rohan is currently based in Kolkata, West Bengal, India."
+    },
+    {
+      "question": "What is Rohan's current location?",
+      "answer": "Rohan is currently based in Kolkata, West Bengal, India."
+    },
+    {
+      "question": "Which city is Rohan from?",
+      "answer": "Rohan is from Kolkata, West Bengal, India."
+    },
+    {
+      "question": "What is Rohan's permanent address?",
+      "answer": "Rohan's permanent residential address is private and is not shared publicly."
+    },
+    {
+      "question": "What is Rohan's home address?",
+      "answer": "Rohan's exact home address is private and is not shared publicly."
+    },
+    {
+      "question": "What is Rohan's exact home address?",
+      "answer": "Rohan's exact residential address is private and is not shared publicly."
+    },
+    {
+      "question": "Who is Rohan's father?",
+      "answer": "Rohan's father's name is Amiya Karak."
+    },
+    {
+      "question": "What is Rohan's father's name?",
+      "answer": "Rohan's father's name is Amiya Karak."
+    },
+    {
+      "question": "Who is Rohan's mother?",
+      "answer": "Rohan's mother's name is Rupali Karak."
+    },
+    {
+      "question": "What is Rohan's mother's name?",
+      "answer": "Rohan's mother's name is Rupali Karak."
+    },
+    {
+      "question": "Does Rohan have any siblings?",
+      "answer": "Yes. Rohan has one elder sister named Sagarika Karak."
+    },
+    {
+      "question": "Who is Rohan's elder sister?",
+      "answer": "Rohan's elder sister is Sagarika Karak."
+    },
+    {
+      "question": "What is Rohan's elder sister's name?",
+      "answer": "Rohan's elder sister's name is Sagarika Karak."
+    },
+    {
+      "question": "What does Rohan's elder sister do?",
+      "answer": "Rohan's elder sister, Sagarika Karak, is a Government Health Officer (CHO - Community Health Officer) serving in the public healthcare sector."
+    },
+    {
+      "question": "What is Rohan's sister's profession?",
+      "answer": "Rohan's elder sister, Sagarika Karak, is a Government Health Officer (CHO - Community Health Officer) serving in the public healthcare sector."
+    },
+    {
+      "question": "How many siblings does Rohan have?",
+      "answer": "Rohan has one known sibling, his elder sister Sagarika Karak."
+    },
+    {
+      "question": "What does Rohan's father do?",
+      "answer": "Information about Rohan's father's profession is not currently available."
+    },
+    {
+      "question": "What does Rohan's mother do?",
+      "answer": "Information about Rohan's mother's profession is not currently available."
+    },
+    {
+      "question": "What does Rohan study?",
+      "answer": "Rohan is pursuing a B.Tech in Computer Science and Engineering."
+    },
+    {
+      "question": "Which college does Rohan attend?",
+      "answer": "Rohan attends Netaji Subhash Engineering College in Kolkata."
+    },
+    {
+      "question": "Where does Rohan study?",
+      "answer": "Rohan is pursuing B.Tech in Computer Science and Engineering at Netaji Subhash Engineering College in Kolkata, West Bengal."
+    },
+    {
+      "question": "What is Rohan's degree?",
+      "answer": "Rohan is pursuing a B.Tech in Computer Science and Engineering."
+    },
+    {
+      "question": "When will Rohan graduate?",
+      "answer": "Rohan is pursuing his B.Tech from 2023 to 2027."
+    },
+    {
+      "question": "What is Rohan's CGPA?",
+      "answer": "Rohan's CGPA is 7.09 till the 6th semester."
+    },
+    {
+      "question": "Is Rohan a student?",
+      "answer": "Yes. Rohan is a Computer Science and Engineering undergraduate student."
+    },
+    {
+      "question": "Is Rohan a fresher?",
+      "answer": "Yes. Rohan is a fresher focused on Full Stack Development and AI/ML."
+    },
+    {
+      "question": "Does Rohan have work experience?",
+      "answer": "Rohan is a fresher and has developed his practical experience through hands-on projects, self-learning and technical problem solving."
+    },
+    {
+      "question": "What kind of developer is Rohan?",
+      "answer": "Rohan is a Full Stack Developer and AI/LLM enthusiast."
+    },
+    {
+      "question": "What does Rohan do?",
+      "answer": "Rohan focuses on Full Stack Development and AI/ML, with hands-on experience building web applications and integrating AI technologies."
+    },
+    {
+      "question": "What is Rohan's main career focus?",
+      "answer": "Rohan's career focus includes Full Stack Development, AI/ML, Generative AI, LLMs, Software Development and Problem Solving."
+    },
+    {
+      "question": "What is Rohan's career goal?",
+      "answer": "Rohan aims to grow as a strong Full Stack Developer and AI/ML Engineer and contribute to innovative products that create meaningful real-world impact."
+    },
+    {
+      "question": "Is Rohan available for opportunities?",
+      "answer": "Yes. Rohan is currently seeking an opportunity to begin his professional career where he can learn, contribute, grow and solve real-world problems."
+    },
+    {
+      "question": "Does Rohan know MERN stack?",
+      "answer": "Yes. Rohan has hands-on experience with MongoDB, Express.js, React.js and Node.js."
+    },
+    {
+      "question": "What technologies does Rohan use?",
+      "answer": "Rohan works with modern web technologies including React.js, Node.js, Express.js, MongoDB, JavaScript, TypeScript, MySQL, PostgreSQL, Tailwind CSS and Bootstrap."
+    },
+    {
+      "question": "What are Rohan's technical skills?",
+      "answer": "Rohan's skills include C, C++, Java, Python, React.js, Node.js, Express.js, MongoDB, JavaScript, MySQL, PostgreSQL, TypeScript, Bootstrap, Tailwind CSS, Git, GitHub, AWS and more."
+    },
+    {
+      "question": "What programming languages does Rohan know?",
+      "answer": "Rohan works with C, C++, Java and Python, along with JavaScript and TypeScript."
+    },
+    {
+      "question": "Does Rohan know Python?",
+      "answer": "Yes. Python is one of Rohan's programming languages and he also uses it for AI/ML-related work."
+    },
+    {
+      "question": "Does Rohan know Java?",
+      "answer": "Yes. Java is one of Rohan's programming languages."
+    },
+    {
+      "question": "Does Rohan know C++?",
+      "answer": "Yes. C++ is one of Rohan's programming languages."
+    },
+    {
+      "question": "Is Rohan interested in AI?",
+      "answer": "Yes. Rohan is an AI/LLM enthusiast with interests in Artificial Intelligence, Machine Learning, Generative AI and Large Language Models."
+    },
+    {
+      "question": "Is Rohan interested in Generative AI?",
+      "answer": "Yes. Rohan is interested in Generative AI, Large Language Models and AI-powered applications."
+    },
+    {
+      "question": "Has Rohan built AI projects?",
+      "answer": "Yes. Rohan built a Text To Image Generator using React, Node.js, Express.js and MongoDB with OpenAI image generation API integration."
+    },
+    {
+      "question": "What projects has Rohan built?",
+      "answer": "Rohan has built projects including Doctor Appointment Web, Text To Image Generator, and Video Calling Chat App."
+    },
+    {
+      "question": "What is Rohan's best project?",
+      "answer": "One of Rohan's notable projects is the Text To Image Generator, an AI-powered application that converts text prompts into images."
+    },
+    {
+      "question": "What is Rohan's favorite project?",
+      "answer": "A single favorite project is not currently specified."
+    },
+    {
+      "question": "What is Rohan's GitHub username?",
+      "answer": "Rohan's GitHub username is karakRohan."
+    },
+    {
+      "question": "What is Rohan's LeetCode username?",
+      "answer": "Rohan's LeetCode username is Code_Rider42."
+    },
+    {
+      "question": "How many problems has Rohan solved on LeetCode?",
+      "answer": "Rohan has solved 430+ problems on LeetCode. For current live statistics, the live LeetCode dashboard should be used."
+    },
+    {
+      "question": "How many problems has Rohan solved on GeeksforGeeks?",
+      "answer": "Rohan has solved 450+ problems on GeeksforGeeks."
+    },
+    {
+      "question": "Does Rohan participate in coding challenges?",
+      "answer": "Yes. Rohan regularly practices problem solving and has completed coding streaks and challenges on LeetCode and GeeksforGeeks."
+    },
+    {
+      "question": "Does Rohan have coding streak achievements?",
+      "answer": "Yes. Rohan has earned LeetCode 50 Days, 100 Days, 200 Days and 365 Days Coding Streak Badges."
+    },
+    {
+      "question": "Has Rohan participated in hackathons?",
+      "answer": "Yes. Rohan participated in college hackathons at IEM Kolkata and NIT Rourkela."
+    },
+    {
+      "question": "Does Rohan have any certifications?",
+      "answer": "Yes. Rohan has an Open Source GitHub Certificate from GDSC."
+    },
+    {
+      "question": "What are Rohan's strengths?",
+      "answer": "Rohan's strengths include problem solving, leadership, teamwork, communication, continuous learning and hands-on development."
+    },
+    {
+      "question": "What are Rohan's hobbies or interests?",
+      "answer": "Rohan's interests include coding, problem solving, building projects, exploring emerging technologies and learning about AI/ML and LLMs."
+    },
+    {
+      "question": "Why should a company hire Rohan?",
+      "answer": "Rohan combines a strong foundation in computer science with hands-on experience in Full Stack Development, AI/ML, practical projects, problem solving and continuous learning."
+    },
+    {
+      "question": "What is Rohan's favorite programming language?",
+      "answer": "Rohan works with multiple programming languages, including C, C++, Java and Python. A single favorite language is not currently specified."
+    },
+    {
+      "question": "What is Rohan's school name?",
+      "answer": "Rohan's school information is not currently available in the knowledge base."
+    },
+    {
+      "question": "What is Rohan's date of birth?",
+      "answer": "Rohan's date of birth is not currently available."
+    },
+    {
+      "question": "What is Rohan's age?",
+      "answer": "Rohan's age is not currently available."
+    },
+    {
+      "question": "Where can I find Rohan's GitHub?",
+      "answer": "Rohan's GitHub profile is available at https://github.com/karakRohan"
+    },
+    {
+      "question": "Where can I find Rohan's LinkedIn?",
+      "answer": "Rohan's LinkedIn profile is available at https://www.linkedin.com/in/rohan-karak-9a0b78288/"
+    },
+    {
+      "question": "Where can I find Rohan's portfolio?",
+      "answer": "Rohan's portfolio is available at https://rohanportfolio-eight.vercel.app/"
+    },
+    {
+      "question": "Where can I find Rohan's LeetCode profile?",
+      "answer": "Rohan's LeetCode profile is available at https://leetcode.com/u/Code_Rider42/"
+    },
+    {
+      "question": "Where can I find Rohan online?",
+      "answer": "Rohan can be found on GitHub, LinkedIn, his portfolio, LeetCode, GeeksforGeeks and other social profiles listed in his portfolio."
+    },
+    {
+      "question": "Where can I find Rohan's resume?",
+      "answer": "Rohan's resume is available through the Resume section of the portfolio."
+    },
+    {
+      "question": "How can someone contact Rohan?",
+      "answer": "Rohan can be contacted at +91-9832749304 or karakrohan2005@gmail.com, and through the professional social links available in his portfolio."
+    },
+    {
+      "question": "What information is not currently available about Rohan?",
+      "answer": "Some personal details such as exact residential address, date of birth and other private information are not publicly available."
+    }
   ],
 
   "resume": {
