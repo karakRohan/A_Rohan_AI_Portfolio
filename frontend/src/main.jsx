@@ -448,8 +448,36 @@ function App() {
   // UI
   // ====================================================
 
+  function handlePointerMove(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mx", `${x}px`);
+    e.currentTarget.style.setProperty("--my", `${y}px`);
+  }
+
+  function handlePointerDown(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--touch-x", `${x}px`);
+    e.currentTarget.style.setProperty("--touch-y", `${y}px`);
+    e.currentTarget.classList.add("touching");
+  }
+
+  function handlePointerUp(e) {
+    e.currentTarget.classList.remove("touching");
+  }
+
   return (
-    <div className="app">
+    <div
+      className="app"
+      onPointerMove={handlePointerMove}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
 
       <style>{`
         @keyframes livePulse {
