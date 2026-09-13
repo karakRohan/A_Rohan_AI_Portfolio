@@ -221,6 +221,64 @@ function App() {
 
 
   // ====================================================
+  // CURSOR / TOUCH ANIMATION
+  // ====================================================
+
+  useEffect(() => {
+    const app = document.querySelector(".app");
+
+    if (!app) return;
+
+    const moveGlow = (x, y) => {
+      app.style.setProperty("--cursor-x", `${x}px`);
+      app.style.setProperty("--cursor-y", `${y}px`);
+      app.classList.add("cursor-active");
+    };
+
+    const handlePointerMove = (event) => {
+      moveGlow(event.clientX, event.clientY);
+    };
+
+    const handlePointerDown = (event) => {
+      moveGlow(event.clientX, event.clientY);
+
+      const ripple = document.createElement("span");
+      ripple.className = "touch-ripple";
+      ripple.style.left = `${event.clientX}px`;
+      ripple.style.top = `${event.clientY}px`;
+
+      document.body.appendChild(ripple);
+
+      window.setTimeout(() => {
+        ripple.remove();
+      }, 700);
+    };
+
+    const handlePointerLeave = () => {
+      app.classList.remove("cursor-active");
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
+
+    window.addEventListener("pointerdown", handlePointerDown, {
+      passive: true,
+    });
+
+    window.addEventListener("pointerout", (event) => {
+      if (!event.relatedTarget) {
+        handlePointerLeave();
+      }
+    });
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
+
+  // ====================================================
   // LOAD PROFILE
   // ====================================================
 
@@ -237,6 +295,43 @@ function App() {
         );
       });
   }, []);
+
+  // ====================================================
+  // SECTION NAVIGATION
+  // ====================================================
+
+  function closeAllSections(scrollToTop = true) {
+    setAboutOpen(false);
+    setSkillsOpen(false);
+    setExperienceOpen(false);
+
+    if (scrollToTop) {
+      window.requestAnimationFrame(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    }
+  }
+
+  function openSection(section) {
+    setAboutOpen(section === "about");
+    setSkillsOpen(section === "skills");
+    setExperienceOpen(section === "experience");
+    setOpen(false);
+
+    window.requestAnimationFrame(() => {
+      window.setTimeout(() => {
+        document
+          .getElementById(section)
+          ?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+      }, 80);
+    });
+  }
 
 
   // ====================================================
@@ -448,36 +543,9 @@ function App() {
   // UI
   // ====================================================
 
-  function handlePointerMove(e) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty("--mx", `${x}px`);
-    e.currentTarget.style.setProperty("--my", `${y}px`);
-  }
-
-  function handlePointerDown(e) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty("--touch-x", `${x}px`);
-    e.currentTarget.style.setProperty("--touch-y", `${y}px`);
-    e.currentTarget.classList.add("touching");
-  }
-
-  function handlePointerUp(e) {
-    e.currentTarget.classList.remove("touching");
-  }
-
   return (
-    <div
-      className="app"
-      onPointerMove={handlePointerMove}
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-      onPointerLeave={handlePointerUp}
-    >
+    <div className="app">
+      <div className="cursor-glow" aria-hidden="true" />
 
       <style>{`
         @keyframes livePulse {
@@ -636,17 +704,7 @@ function App() {
               href="#about"
               onClick={(e) => {
                 e.preventDefault();
-                setAboutOpen(true);
-                setOpen(false);
-
-                setTimeout(() => {
-                  document
-                    .getElementById("about")
-                    ?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                }, 50);
+                openSection("about");
               }}
             >
               <UserRound size={17} />
@@ -657,6 +715,12 @@ function App() {
               href="https://github.com/karakRohan"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                setOpen(false);
+                setAboutOpen(false);
+                setSkillsOpen(false);
+                setExperienceOpen(false);
+              }}
             >
               <Code2 size={17} />
               Projects
@@ -667,17 +731,7 @@ function App() {
               href="#skills"
               onClick={(e) => {
                 e.preventDefault();
-                setSkillsOpen(true);
-                setOpen(false);
-
-                setTimeout(() => {
-                  document
-                    .getElementById("skills")
-                    ?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                }, 50);
+                openSection("skills");
               }}
             >
               <BrainCircuit size={17} />
@@ -688,17 +742,7 @@ function App() {
               href="#experience"
               onClick={(e) => {
                 e.preventDefault();
-                setExperienceOpen(true);
-                setOpen(false);
-
-                setTimeout(() => {
-                  document
-                    .getElementById("experience")
-                    ?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                }, 50);
+                openSection("experience");
               }}
             >
               <BriefcaseBusiness size={17} />
@@ -714,6 +758,12 @@ function App() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                setOpen(false);
+                setAboutOpen(false);
+                setSkillsOpen(false);
+                setExperienceOpen(false);
+              }}
             >
               <FileText size={17} />
               Resume
@@ -837,11 +887,43 @@ function App() {
 
           {aboutOpen && (
           <section id="about" className="about-section">
-            <div className="about-header">
-              <p className="about-eyebrow">ABOUT ME</p>
-              <h2>
-                About <span>Rohan</span>
-              </h2>
+            <div
+              className="about-header"
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                gap: "16px",
+              }}
+            >
+              <div>
+                <p className="about-eyebrow">ABOUT ME</p>
+                <h2>
+                  About <span>Rohan</span>
+                </h2>
+              </div>
+
+              <button
+                type="button"
+                aria-label="Close About section"
+                onClick={() => closeAllSections(true)}
+                style={{
+                  width: "34px",
+                  height: "34px",
+                  flexShrink: 0,
+                  display: "grid",
+                  placeItems: "center",
+                  border: "1px solid #2b2b34",
+                  borderRadius: "10px",
+                  background: "#111116",
+                  color: "#aaaab5",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                  lineHeight: 1,
+                }}
+              >
+                ×
+              </button>
             </div>
 
             <div className="about-content">
@@ -867,11 +949,40 @@ function App() {
 
           {skillsOpen && (
             <section id="skills" className="skills-section">
-              <div className="skills-header">
-                <p className="skills-eyebrow">TECHNICAL SKILLS</p>
-                <h2>
+              <div
+                className="skills-header"
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  gap: "16px",
+                }}
+              >
+                <div>
+                  <p className="skills-eyebrow">TECHNICAL SKILLS</p>
+                  <h2>
                   Skills <span>&amp; Expertise</span>
-                </h2>
+                  </h2>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => closeAllSections(true)}
+                  aria-label="Close Skills section"
+                  style={{
+                    border: "1px solid #2b2b34",
+                    background: "#111116",
+                    color: "#a9a9b5",
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                    lineHeight: 1,
+                  }}
+                >
+                  ×
+                </button>
               </div>
 
               <div className="skills-grid">
@@ -996,8 +1107,17 @@ function App() {
                 boxShadow: "0 18px 55px rgba(0, 0, 0, 0.24)",
               }}
             >
-              <div style={{ marginBottom: "24px" }}>
-                <p
+              <div
+                style={{
+                  marginBottom: "24px",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  gap: "16px",
+                }}
+              >
+                <div>
+                  <p
                   style={{
                     margin: "0 0 8px",
                     color: "#8b7cf6",
@@ -1020,6 +1140,26 @@ function App() {
                 >
                   Experience
                 </h2>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => closeAllSections(true)}
+                  aria-label="Close Experience section"
+                  style={{
+                    border: "1px solid #2b2b34",
+                    background: "#111116",
+                    color: "#a9a9b5",
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                    lineHeight: 1,
+                  }}
+                >
+                  ×
+                </button>
               </div>
 
               <div

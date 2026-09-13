@@ -1,14 +1,31 @@
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   margin: 0;
+  min-height: 100vh;
+  width: 100%;
   background: #07070a;
   color: #f4f4f5;
   font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
 }
 
 button,
@@ -18,8 +35,9 @@ textarea {
 
 .app {
   min-height: 100vh;
+  height: auto;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   background:
     radial-gradient(
       circle at 70% 20%,
@@ -37,6 +55,7 @@ textarea {
   filter: blur(100px);
   opacity: .12;
   pointer-events: none;
+  z-index: 0;
 }
 
 .ambient-one {
@@ -51,6 +70,116 @@ textarea {
   left: 15%;
 }
 
+
+/* =========================================
+   CURSOR / TOUCH ANIMATION
+========================================= */
+
+.app {
+  --cursor-x: 50vw;
+  --cursor-y: 35vh;
+}
+
+.cursor-glow {
+  position: fixed;
+  left: var(--cursor-x);
+  top: var(--cursor-y);
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.16) 0,
+      rgba(139, 92, 246, 0.08) 24%,
+      rgba(139, 92, 246, 0.025) 48%,
+      transparent 72%
+    );
+  filter: blur(8px);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  transition:
+    opacity .25s ease,
+    width .25s ease,
+    height .25s ease;
+}
+
+.app.cursor-active .cursor-glow {
+  opacity: 1;
+}
+
+.touch-ripple {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid rgba(67, 209, 122, .75);
+  box-shadow:
+    0 0 0 0 rgba(67, 209, 122, .42),
+    0 0 25px rgba(67, 209, 122, .28);
+  pointer-events: none;
+  z-index: 9999;
+  animation: touchRipple .7s ease-out forwards;
+}
+
+@keyframes touchRipple {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(.5);
+    box-shadow:
+      0 0 0 0 rgba(67, 209, 122, .46),
+      0 0 20px rgba(67, 209, 122, .32);
+  }
+
+  70% {
+    opacity: .72;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(5);
+    box-shadow:
+      0 0 0 22px rgba(67, 209, 122, 0),
+      0 0 55px rgba(67, 209, 122, 0);
+  }
+}
+
+.sidebar a,
+.suggestions button,
+.send,
+.resume-open-btn {
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease,
+    opacity .2s ease;
+}
+
+.sidebar a:hover,
+.suggestions button:hover {
+  transform: translateX(3px);
+}
+
+.send:hover,
+.resume-open-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (hover: none) {
+  .cursor-glow {
+    display: none;
+  }
+
+  .sidebar a:hover,
+  .suggestions button:hover {
+    transform: none;
+  }
+}
 
 /* =========================================
    TOPBAR
@@ -121,10 +250,13 @@ textarea {
 
 .layout {
   display: grid;
+  position: relative;
+  z-index: 3;
   grid-template-columns: 245px 1fr;
   max-width: 1400px;
   margin: auto;
   min-height: calc(100vh - 72px);
+  height: auto;
 }
 
 
@@ -591,18 +723,22 @@ nav,
   }
 
   .sidebar {
-    position: fixed;
+    position: absolute;
     top: 72px;
-    bottom: 0;
     left: -260px;
+    bottom: auto;
     width: min(245px, 78vw);
     max-width: 245px;
-    background: rgba(8, 8, 11, 0.94);
+    height: calc(100vh - 72px);
+    min-height: 0;
+    max-height: calc(100vh - 72px);
+    background: rgba(8, 8, 11, 0.97);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 18px 0 45px rgba(0, 0, 0, 0.28);
-    transition: left .25s ease, width .25s ease;
+    transition: left .25s ease;
     overflow-y: auto;
+    z-index: 1100;
   }
 
   .sidebar.open {
@@ -677,135 +813,102 @@ nav,
   border-radius: inherit;
 }
 
-
 /* =========================================
-   INTERACTIVE CURSOR / TOUCH ANIMATION
+   SAFE INTERACTION ANIMATIONS
 ========================================= */
-
-.app {
-  --mx: 50%;
-  --my: 18%;
-  --touch-x: 50%;
-  --touch-y: 50%;
-  isolation: isolate;
-}
-
-.app::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(
-      430px circle at var(--mx) var(--my),
-      rgba(139, 92, 246, 0.13),
-      rgba(139, 92, 246, 0.045) 28%,
-      transparent 62%
-    );
-  transition: background-position 0.08s linear;
-}
-
-.app::after {
-  content: "";
-  position: absolute;
-  width: 210px;
-  height: 210px;
-  left: calc(var(--touch-x) - 105px);
-  top: calc(var(--touch-y) - 105px);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transform: scale(0.35);
-  background: radial-gradient(
-    circle,
-    rgba(74, 222, 128, 0.22) 0%,
-    rgba(74, 222, 128, 0.08) 28%,
-    transparent 68%
-  );
-}
-
-.app.touching::after {
-  animation: touchRipple 0.65s ease-out;
-}
-
-.app > * {
-  position: relative;
-  z-index: 2;
-}
-
-@keyframes touchRipple {
-  0% {
-    opacity: 0.95;
-    transform: scale(0.25);
-  }
-  55% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.35);
-  }
-}
 
 .sidebar a,
 .suggestions button,
-.resume-open-btn,
 .send,
+.resume-open-btn,
 .chat-link,
-.skill-card,
-.about-section,
-.experience-section,
-.profile-card,
-.bubble {
+.hero-icon,
+.logo {
   transition:
-    transform 0.22s ease,
-    border-color 0.22s ease,
-    box-shadow 0.22s ease,
-    background 0.22s ease,
-    color 0.22s ease;
+    transform .2s ease,
+    opacity .2s ease,
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
 }
 
 .sidebar a:hover,
-.suggestions button:hover,
-.resume-open-btn:hover,
-.send:hover {
+.suggestions button:hover {
   transform: translateY(-2px);
 }
 
-.skill-card:hover,
-.about-section:hover,
-.experience-section:hover,
-.profile-card:hover,
-.bubble:hover {
-  transform: translateY(-3px);
-  border-color: #34313f;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.24);
+.send:hover,
+.resume-open-btn:hover {
+  transform: translateY(-2px) scale(1.02);
 }
 
-.send:active,
-.suggestions button:active,
+.logo:hover,
+.hero-icon:hover {
+  transform: translateY(-3px) rotate(-2deg);
+}
+
 .sidebar a:active,
-.resume-open-btn:active {
-  transform: scale(0.97);
+.suggestions button:active,
+.send:active,
+.resume-open-btn:active,
+.hero-icon:active,
+.logo:active {
+  transform: scale(.97);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .app::before,
-  .app::after,
-  .sidebar a,
-  .suggestions button,
-  .resume-open-btn,
-  .send,
-  .chat-link,
-  .skill-card,
-  .about-section,
-  .experience-section,
-  .profile-card,
-  .bubble {
-    transition: none !important;
-    animation: none !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
+}
+
+
+/* =========================================
+   CUSTOM SCROLLBAR
+========================================= */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #6d4aff #0b0b10;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #6d4aff #0b0b10;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #0b0b10;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #8b5cf6,
+    #5b21b6
+  );
+  border-radius: 999px;
+  border: 2px solid #0b0b10;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #a78bfa,
+    #6d28d9
+  );
 }
