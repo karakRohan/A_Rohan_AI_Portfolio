@@ -583,19 +583,91 @@ function App() {
 
       <header className="topbar">
 
-        <div className="brand">
-
-          <div className="logo">
-            <Bot size={22} />
-          </div>
+        <div
+          className="brand"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "11px",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
+          <img
+            src="/profile.jpg"
+            alt="Rohan Karak"
+            style={{
+              width: "42px",
+              height: "42px",
+              borderRadius: "50%",
+              objectFit: "cover",
+              objectPosition: "center",
+              border: "2px solid rgba(139, 92, 246, 0.65)",
+              boxShadow: "0 0 0 4px rgba(139, 92, 246, 0.08)",
+              display: "block",
+              flexShrink: 0,
+            }}
+          />
 
           <div>
             <strong>{name}</strong>
             <span>Personal AI Agent</span>
           </div>
-
         </div>
 
+        <div
+          className="topbar-live-status"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            whiteSpace: "nowrap",
+            zIndex: 6,
+          }}
+        >
+          <span
+            style={{
+              color: "#b9b9c4",
+              fontSize: "11px",
+              fontWeight: 650,
+            }}
+          >
+            Rohan Is Live 24/7
+          </span>
+
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "5px",
+              padding: "5px 9px",
+              border: "1px solid rgba(67, 209, 122, 0.35)",
+              borderRadius: "999px",
+              background: "rgba(67, 209, 122, 0.08)",
+              color: "#43d17a",
+              fontSize: "9px",
+              fontWeight: 700,
+              letterSpacing: "0.05em",
+            }}
+          >
+            <span
+              style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                background: "#43d17a",
+                boxShadow: "0 0 8px rgba(67, 209, 122, 0.8)",
+                animation: "livePulse 1.5s infinite",
+              }}
+            />
+            LIVE
+          </span>
+        </div>
 
         <button
           className="menu-btn"
@@ -639,33 +711,6 @@ function App() {
                 gap: "10px",
               }}
             >
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "7px",
-                  marginBottom: "2px",
-                  padding: "6px 12px",
-                  border: "1px solid rgba(67, 209, 122, 0.35)",
-                  borderRadius: "999px",
-                  background: "rgba(67, 209, 122, 0.08)",
-                  color: "#43d17a",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  letterSpacing: "0.04em",
-                }}
-              >
-                <span
-                  style={{
-                    width: "7px",
-                    height: "7px",
-                    borderRadius: "50%",
-                    background: "#43d17a",
-                    animation: "livePulse 1.5s infinite",
-                  }}
-                />
-                LIVE
-              </div>
               <div className="avatar">
                 <img
                   src="/profile.jpg"
@@ -679,6 +724,48 @@ function App() {
                 <p style={{ margin: "6px 0 0" }}>
                   MERN Full Stack Developer &amp; AI/ML Enthusiast
                 </p>
+              </div>
+
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  marginTop: "2px",
+                  color: "#b9b9c4",
+                  fontSize: "11px",
+                  fontWeight: 600,
+                }}
+              >
+                <span>Rohan Is Live</span>
+
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "5px 10px",
+                    border: "1px solid rgba(67, 209, 122, 0.35)",
+                    borderRadius: "999px",
+                    background: "rgba(67, 209, 122, 0.08)",
+                    color: "#43d17a",
+                    fontSize: "10px",
+                    fontWeight: 700,
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: "7px",
+                      height: "7px",
+                      borderRadius: "50%",
+                      background: "#43d17a",
+                      animation: "livePulse 1.5s infinite",
+                    }}
+                  />
+                  LIVE
+                </span>
               </div>
             </div>
 

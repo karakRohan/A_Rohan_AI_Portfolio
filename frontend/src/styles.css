@@ -912,3 +912,228 @@ body::-webkit-scrollbar-thumb:hover {
     #6d28d9
   );
 }
+
+
+/* =========================================
+   HEADER PROFILE + ROHAN IS LIVE
+========================================= */
+
+.topbar {
+  position: relative;
+}
+
+.topbar-live-brand {
+  pointer-events: none;
+}
+
+.topbar-live-brand img {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.topbar-live-brand:hover img {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 0 4px rgba(139, 92, 246, 0.10),
+    0 0 22px rgba(139, 92, 246, 0.28);
+}
+
+@media (max-width: 800px) {
+  .topbar-live-brand {
+    left: 50% !important;
+    top: 50% !important;
+    max-width: calc(100% - 88px);
+    gap: 8px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .topbar-live-brand img {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .topbar-live-brand > div {
+    gap: 3px !important;
+  }
+
+  .topbar-live-brand strong {
+    font-size: 12px !important;
+  }
+
+  .topbar-live-brand > div > div {
+    gap: 5px !important;
+  }
+
+  .topbar-live-brand > div > div > span:first-child {
+    font-size: 8px !important;
+  }
+
+  .topbar-live-brand > div > div > span:last-child {
+    padding: 3px 6px !important;
+    font-size: 8px !important;
+  }
+
+  .menu-btn {
+    position: relative;
+    z-index: 20;
+  }
+}
+
+
+/* =========================================
+   FINAL HEADER PROFILE / LIVE POSITIONING
+   Works with the current main.jsx classes
+========================================= */
+
+.topbar-live-status {
+  pointer-events: none;
+  text-align: center;
+}
+
+.topbar-live-status > span:first-child {
+  white-space: nowrap;
+}
+
+.topbar-live-status > span:last-child {
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .topbar {
+    height: 112px;
+    padding: 0 18px;
+    align-items: flex-start;
+    padding-top: 16px;
+  }
+
+  .brand {
+    align-items: center;
+    max-width: calc(100% - 58px);
+  }
+
+  .brand > img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .brand strong {
+    font-size: 13px !important;
+  }
+
+  .brand span {
+    font-size: 9px !important;
+    margin-top: 2px !important;
+  }
+
+  .topbar-live-status {
+    left: 50% !important;
+    top: 76px !important;
+    transform: translateX(-50%) !important;
+    width: max-content;
+    max-width: calc(100% - 28px);
+    gap: 7px !important;
+    padding: 6px 10px;
+    border: 1px solid #2b2b34;
+    border-radius: 999px;
+    background: rgba(13, 13, 17, 0.92);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(12px);
+  }
+
+  .topbar-live-status > span:first-child {
+    font-size: 10px !important;
+    line-height: 1;
+  }
+
+  .topbar-live-status > span:last-child {
+    padding: 4px 8px !important;
+    font-size: 8px !important;
+  }
+
+  .topbar-live-status > span:last-child > span {
+    width: 5px !important;
+    height: 5px !important;
+  }
+
+  .menu-btn {
+    margin-top: 3px;
+  }
+
+  .layout {
+    min-height: 0;
+  }
+}
+
+
+/* =========================================
+   MOBILE HEADER — COMPACT FINAL LAYOUT
+========================================= */
+
+@media (max-width: 800px) {
+  .topbar {
+    height: 64px;
+    min-height: 64px;
+    padding: 8px 14px 0;
+    align-items: flex-start;
+    overflow: visible;
+  }
+
+  .brand {
+    gap: 8px;
+    align-items: center;
+  }
+
+  .brand > img {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50% !important;
+  }
+
+  .brand strong {
+    font-size: 12px !important;
+    line-height: 1.05 !important;
+  }
+
+  .brand span {
+    font-size: 8px !important;
+    margin-top: 2px !important;
+  }
+
+  .topbar-live-status {
+    left: 50% !important;
+    top: 52px !important;
+    transform: translate(-50%, -50%) !important;
+    width: max-content;
+    max-width: calc(100% - 104px);
+    gap: 6px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .topbar-live-status > span:first-child {
+    font-size: 8px !important;
+    font-weight: 650 !important;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .topbar-live-status > span:last-child {
+    padding: 3px 7px !important;
+    font-size: 7px !important;
+    line-height: 1;
+  }
+
+  .topbar-live-status > span:last-child > span {
+    width: 4px !important;
+    height: 4px !important;
+  }
+
+  .menu-btn {
+    margin-top: 1px;
+  }
+}
