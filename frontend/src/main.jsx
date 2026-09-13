@@ -215,8 +215,10 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
   const [skillsOpen, setSkillsOpen] = useState(false);
   const [experienceOpen, setExperienceOpen] = useState(false);
+  const [hireOpen, setHireOpen] = useState(false);
 
 
 
@@ -302,8 +304,10 @@ function App() {
 
   function closeAllSections(scrollToTop = true) {
     setAboutOpen(false);
+    setProjectsOpen(false);
     setSkillsOpen(false);
     setExperienceOpen(false);
+    setHireOpen(false);
 
     if (scrollToTop) {
       window.requestAnimationFrame(() => {
@@ -317,8 +321,10 @@ function App() {
 
   function openSection(section) {
     setAboutOpen(section === "about");
+    setProjectsOpen(section === "projects");
     setSkillsOpen(section === "skills");
     setExperienceOpen(section === "experience");
+    setHireOpen(section === "hire");
     setOpen(false);
 
     window.requestAnimationFrame(() => {
@@ -799,19 +805,14 @@ function App() {
             </a>
 
             <a
-              href="https://github.com/karakRohan"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                setOpen(false);
-                setAboutOpen(false);
-                setSkillsOpen(false);
-                setExperienceOpen(false);
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                openSection("projects");
               }}
             >
               <Code2 size={17} />
               Projects
-              <ExternalLink size={13} />
             </a>
 
             <a
@@ -848,13 +849,26 @@ function App() {
               onClick={() => {
                 setOpen(false);
                 setAboutOpen(false);
+                setProjectsOpen(false);
                 setSkillsOpen(false);
                 setExperienceOpen(false);
+                setHireOpen(false);
               }}
             >
               <FileText size={17} />
               Resume
               <ExternalLink size={13} />
+            </a>
+
+            <a
+              href="#hire"
+              onClick={(e) => {
+                e.preventDefault();
+                openSection("hire");
+              }}
+            >
+              <BriefcaseBusiness size={17} />
+              Hire Me
             </a>
 
           </nav>
@@ -967,6 +981,269 @@ function App() {
 
           </section>
 
+
+          {/* ============================================
+              HIRE ME
+          ============================================= */}
+
+          {hireOpen && (
+            <section
+              id="hire"
+              className="experience-section"
+              style={{
+                width: "100%",
+                margin: "40px 0 70px",
+                padding: "30px",
+                border: "1px solid #24242c",
+                borderRadius: "22px",
+                background:
+                  "radial-gradient(circle at top right, rgba(139, 92, 246, 0.10), transparent 38%), linear-gradient(145deg, rgba(18, 18, 24, 0.98), rgba(12, 12, 17, 0.98))",
+                boxShadow: "0 18px 55px rgba(0, 0, 0, 0.24)",
+              }}
+            >
+              <div
+                style={{
+                  marginBottom: "24px",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  gap: "16px",
+                }}
+              >
+                <div>
+                  <p
+                    style={{
+                      margin: "0 0 8px",
+                      color: "#8b7cf6",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      letterSpacing: "0.16em",
+                    }}
+                  >
+                    HIRE ME
+                  </p>
+                  <h2
+                    style={{
+                      margin: 0,
+                      color: "#f7f7fa",
+                      fontSize: "clamp(28px, 4vw, 40px)",
+                      lineHeight: 1.1,
+                      letterSpacing: "-0.035em",
+                    }}
+                  >
+                    Let&apos;s Work Together
+                  </h2>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => closeAllSections(true)}
+                  aria-label="Close Hire Me section"
+                  style={{
+                    border: "1px solid #2b2b34",
+                    background: "#111116",
+                    color: "#a9a9b5",
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                    lineHeight: 1,
+                    flexShrink: 0,
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              <p
+                style={{
+                  margin: "0 0 22px",
+                  color: "#b9b9c4",
+                  fontSize: "14px",
+                  lineHeight: 1.8,
+                }}
+              >
+                Rohan is currently open to opportunities in Full Stack
+                Development, AI/ML, and Generative AI. For internships,
+                full-time roles, collaborations, or project opportunities,
+                feel free to get in touch.
+              </p>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                  gap: "12px",
+                  marginBottom: "20px",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "16px",
+                    border: "1px solid #292932",
+                    borderRadius: "14px",
+                    background: "#111116",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#858591",
+                      fontSize: "10px",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      marginBottom: "7px",
+                    }}
+                  >
+                    EMAIL
+                  </div>
+                  <div
+                    style={{
+                      color: "#f1f1f5",
+                      fontSize: "13px",
+                      lineHeight: 1.6,
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    {profile?.email || "karakrohan2005@gmail.com"}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    padding: "16px",
+                    border: "1px solid #292932",
+                    borderRadius: "14px",
+                    background: "#111116",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#858591",
+                      fontSize: "10px",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      marginBottom: "7px",
+                    }}
+                  >
+                    PHONE
+                  </div>
+                  <div
+                    style={{
+                      color: "#f1f1f5",
+                      fontSize: "13px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {profile?.phone || "+91-9832749304"}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    padding: "16px",
+                    border: "1px solid #292932",
+                    borderRadius: "14px",
+                    background: "#111116",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#858591",
+                      fontSize: "10px",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      marginBottom: "7px",
+                    }}
+                  >
+                    LOCATION
+                  </div>
+                  <div
+                    style={{
+                      color: "#f1f1f5",
+                      fontSize: "13px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {profile?.location || "Kolkata, West Bengal, India"}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                }}
+              >
+                <a
+                  href={`mailto:${profile?.email || "karakrohan2005@gmail.com"}?subject=${encodeURIComponent("Opportunity for Rohan Karak")}`}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "7px",
+                    padding: "10px 14px",
+                    borderRadius: "11px",
+                    background: "#8b5cf6",
+                    color: "#fff",
+                    textDecoration: "none",
+                    fontSize: "11px",
+                    fontWeight: 750,
+                  }}
+                >
+                  Contact Rohan
+                  <ExternalLink size={12} />
+                </a>
+
+                {profile?.linkedin && (
+                  <a
+                    href={profile.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "7px",
+                      padding: "10px 14px",
+                      borderRadius: "11px",
+                      border: "1px solid #2b2b34",
+                      background: "#111116",
+                      color: "#c9c9d3",
+                      textDecoration: "none",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    LinkedIn
+                    <ExternalLink size={12} />
+                  </a>
+                )}
+
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "7px",
+                    padding: "10px 14px",
+                    borderRadius: "11px",
+                    border: "1px solid #2b2b34",
+                    background: "#111116",
+                    color: "#c9c9d3",
+                    textDecoration: "none",
+                    fontSize: "11px",
+                    fontWeight: 700,
+                  }}
+                >
+                  View Resume
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+            </section>
+          )}
 
           {/* ============================================
               ABOUT ME
@@ -1348,6 +1625,276 @@ function App() {
             </section>
           )}
 
+
+          {/* ============================================
+              PROJECTS SHOWCASE
+          ============================================= */}
+
+          {projectsOpen && (
+            <section
+              id="projects"
+              className="projects-section"
+              style={{
+                width: "100%",
+                margin: "40px 0 70px",
+                padding: "30px",
+                border: "1px solid #24242c",
+                borderRadius: "22px",
+                background:
+                  "radial-gradient(circle at top right, rgba(139, 92, 246, 0.10), transparent 38%), linear-gradient(145deg, rgba(18, 18, 24, 0.98), rgba(12, 12, 17, 0.98))",
+                boxShadow: "0 18px 55px rgba(0, 0, 0, 0.24)",
+              }}
+            >
+              <div
+                style={{
+                  marginBottom: "24px",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  gap: "16px",
+                }}
+              >
+                <div>
+                  <p
+                    style={{
+                      margin: "0 0 8px",
+                      color: "#8b7cf6",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      letterSpacing: "0.16em",
+                    }}
+                  >
+                    PROJECTS
+                  </p>
+
+                  <h2
+                    style={{
+                      margin: 0,
+                      color: "#f7f7fa",
+                      fontSize: "clamp(28px, 4vw, 40px)",
+                      lineHeight: 1.1,
+                      letterSpacing: "-0.035em",
+                    }}
+                  >
+                    Projects{" "}
+                    <span style={{ color: "#a99cff" }}>
+                      Showcase
+                    </span>
+                  </h2>
+
+                  <p
+                    style={{
+                      margin: "12px 0 0",
+                      color: "#858591",
+                      fontSize: "13px",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    A selection of Rohan's hands-on full-stack,
+                    AI and real-time development projects.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => closeAllSections(true)}
+                  aria-label="Close Projects section"
+                  style={{
+                    border: "1px solid #2b2b34",
+                    background: "#111116",
+                    color: "#a9a9b5",
+                    width: "34px",
+                    height: "34px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                    lineHeight: 1,
+                    flexShrink: 0,
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns:
+                    "repeat(3, minmax(0, 1fr))",
+                  gap: "14px",
+                }}
+              >
+                {[
+                  {
+                    name: "Doctor Appointment Web",
+                    date: "January 2026",
+                    technologies:
+                      "MongoDB • Express.js • React • Node.js",
+                    description:
+                      "A scalable MERN-based healthcare platform supporting patients, doctors, and administrators.",
+                    contributions: [
+                      "Developed REST APIs for appointment scheduling and doctor availability management.",
+                      "Implemented JWT authentication and role-based authorization.",
+                    ],
+                  },
+                  {
+                    name: "Text To Image Generator",
+                    date: "April 2025",
+                    technologies:
+                      "MongoDB • Express.js • React • Node.js",
+                    description:
+                      "An AI-powered web application that converts user text prompts into images.",
+                    contributions: [
+                      "Integrated OpenAI image generation API using Node.js and Express.",
+                      "Designed a responsive React UI with real-time image rendering.",
+                      "Used Cloudinary for cloud storage.",
+                      "Implemented RESTful APIs, JWT authentication, and MongoDB.",
+                    ],
+                  },
+                  {
+                    name: "Video Calling Chat App",
+                    date: "January 2025",
+                    technologies:
+                      "MongoDB • Express.js • React • Node.js • WebRTC",
+                    description:
+                      "A real-time video calling and chat application.",
+                    contributions: [
+                      "Built peer-to-peer video communication using WebRTC.",
+                      "Implemented secure authentication and dynamic room creation.",
+                      "Used MongoDB for message storage.",
+                      "Optimized asynchronous event handling for smooth streaming performance.",
+                    ],
+                  },
+                ].map((project) => (
+                  <article
+                    key={project.name}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                      padding: "20px",
+                      border: "1px solid #292932",
+                      borderRadius: "16px",
+                      background:
+                        "linear-gradient(145deg, rgba(20,20,27,.98), rgba(13,13,18,.98))",
+                      minHeight: "100%",
+                      transition:
+                        "transform .2s ease, border-color .2s ease, box-shadow .2s ease",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-between",
+                        gap: "12px",
+                      }}
+                    >
+                      <h3
+                        style={{
+                          margin: 0,
+                          color: "#f1f1f5",
+                          fontSize: "18px",
+                          lineHeight: 1.3,
+                        }}
+                      >
+                        {project.name}
+                      </h3>
+
+                      <span
+                        style={{
+                          flexShrink: 0,
+                          padding: "4px 8px",
+                          borderRadius: "999px",
+                          border: "1px solid #2f2944",
+                          background:
+                            "rgba(139,92,246,.08)",
+                          color: "#a99cff",
+                          fontSize: "9px",
+                          fontWeight: 700,
+                        }}
+                      >
+                        {project.date}
+                      </span>
+                    </div>
+
+                    <div
+                      style={{
+                        color: "#43d17a",
+                        fontSize: "11px",
+                        lineHeight: 1.6,
+                        fontWeight: 650,
+                      }}
+                    >
+                      {project.technologies}
+                    </div>
+
+                    <p
+                      style={{
+                        margin: 0,
+                        color: "#aaaab6",
+                        fontSize: "12px",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {project.description}
+                    </p>
+
+                    <div
+                      style={{
+                        marginTop: "2px",
+                        color: "#858591",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                      }}
+                    >
+                      Rohan's Contribution
+                    </div>
+
+                    <ul
+                      style={{
+                        margin: 0,
+                        paddingLeft: "18px",
+                        color: "#b9b9c4",
+                        fontSize: "11px",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {project.contributions.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+
+                    <div
+                      style={{
+                        marginTop: "auto",
+                        paddingTop: "6px",
+                      }}
+                    >
+                      <a
+                        href="https://github.com/karakRohan"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          color: "#a99cff",
+                          fontSize: "11px",
+                          fontWeight: 700,
+                          textDecoration: "none",
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        View GitHub
+                        <ExternalLink size={12} />
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* ============================================
               MESSAGES
@@ -2355,6 +2902,45 @@ function App() {
           {/* ============================================
               SUGGESTIONS
           ============================================= */}
+
+          {/* ============================================
+              AI ACTION BUTTONS
+          ============================================= */}
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "8px",
+              margin: "0 0 14px",
+            }}
+          >
+            {[
+              ["Ask About Skills", "What are Rohan's strongest technical skills?"],
+              ["Show My Projects", "Tell me about Rohan's projects."],
+              ["Why Hire Rohan?", "Why should a company hire Rohan?"],
+              ["Coding Journey", "Tell me about Rohan's coding journey."],
+            ].map(([label, question]) => (
+              <button
+                key={label}
+                type="button"
+                onClick={() => sendMessage(question)}
+                style={{
+                  padding: "9px 12px",
+                  borderRadius: "10px",
+                  border: "1px solid #2b2b34",
+                  background: "#111116",
+                  color: "#cfcfe0",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
 
           <div className="suggestions">
 
