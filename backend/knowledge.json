@@ -1,0 +1,149 @@
+{
+  "profile": {
+    "name": "Rohan Karak",
+    "headline": "Full Stack Developer & AI/LLM Enthusiast",
+    "bio": "Computer Science undergraduate with a strong foundation in Data Structures and Algorithms, Object-Oriented Programming, Operating Systems, DBMS, Computer Networks, Complexity Analysis, Distributed Systems, Fault-Tolerant Systems, System Design, and LLD.",
+    "location": "Kolkata, West Bengal, India",
+    "email": "karakrohan2005@gmail.com",
+    "phone": "+91-9832749304",
+
+    "github": "https://github.com/karakRohan",
+    "linkedin": "https://www.linkedin.com/in/rohan-karak-9a0b78288/",
+    "portfolio": "https://rohanportfolio-eight.vercel.app/",
+    "leetcode": "https://leetcode.com/u/Code_Rider42/",
+    "geeksforgeeks": "https://www.geeksforgeeks.org/profile/rohankarak",
+    "instagram": "https://www.instagram.com/rohankarak_79",
+    "facebook": "https://www.facebook.com/rohan.karak.2025/",
+    "twitter": "https://x.com/rohankarak_79",
+    "whatsapp": "https://wa.me/919832749304",
+
+    "resume": "/resume.pdf"
+  },
+
+  "education": [
+    {
+      "institution": "Netaji Subhash Engineering College",
+      "degree": "B.Tech - Computer Science and Engineering",
+      "duration": "2023 - 2027",
+      "location": "Kolkata, West Bengal",
+      "cgpa": "7.09 till 6th Semester"
+    }
+  ],
+
+  "technical_skills": {
+    "languages": [
+      "C",
+      "C++",
+      "Java",
+      "Python"
+    ],
+    "technologies_and_frameworks": [
+      "HTML5",
+      "CSS3",
+      "React.js",
+      "Node.js",
+      "MongoDB",
+      "Express.js",
+      "JavaScript",
+      "MySQL",
+      "PostgreSQL",
+      "TypeScript",
+      "Bootstrap",
+      "Tailwind CSS"
+    ],
+    "coursework": [
+      "Data Structures and Algorithms",
+      "Object-Oriented Programming",
+      "Operating Systems",
+      "DBMS",
+      "Computer Networks",
+      "Software Engineering"
+    ],
+    "developer_tools": [
+      "VS Code",
+      "MySQL",
+      "Canva",
+      "Git",
+      "GitHub",
+      "AWS"
+    ],
+    "soft_skills": [
+      "Leadership",
+      "Team Collaboration",
+      "Problem Solving",
+      "Communication"
+    ]
+  },
+
+  "projects": [
+    {
+      "name": "Doctor Appointment Web",
+      "technologies": [
+        "MongoDB",
+        "Express.js",
+        "React",
+        "Node.js"
+      ],
+      "date": "January 2026",
+      "description": "A scalable MERN-based healthcare platform supporting patients, doctors, and administrators.",
+      "contributions": [
+        "Developed REST APIs for appointment scheduling and doctor availability management.",
+        "Implemented JWT authentication and role-based authorization."
+      ]
+    },
+    {
+      "name": "Text To Image Generator",
+      "technologies": [
+        "MongoDB",
+        "Express.js",
+        "React",
+        "Node.js"
+      ],
+      "date": "April 2025",
+      "description": "An AI-powered web application that converts user text prompts into images.",
+      "contributions": [
+        "Integrated OpenAI image generation API using Node.js and Express.",
+        "Designed a responsive React UI with real-time image rendering.",
+        "Used Cloudinary for cloud storage.",
+        "Implemented RESTful APIs, JWT authentication, and MongoDB."
+      ]
+    },
+    {
+      "name": "Video Calling Chat App",
+      "technologies": [
+        "MongoDB",
+        "Express.js",
+        "React",
+        "Node.js",
+        "WebRTC"
+      ],
+      "date": "January 2025",
+      "description": "A real-time video calling and chat application.",
+      "contributions": [
+        "Built peer-to-peer video communication using WebRTC.",
+        "Implemented secure authentication and dynamic room creation.",
+        "Used MongoDB for message storage.",
+        "Optimized asynchronous event handling for smooth streaming performance."
+      ]
+    }
+  ],
+
+  "certifications": [
+    "Open Source GitHub Certificate - GDSC"
+  ],
+
+  "achievements": [
+    "Earned LeetCode 50 Days, 100 Days, 200 Days and 365 Days Coding Streak Badges.",
+    "Solved 430+ problems on LeetCode.",
+    "Completed the GeeksforGeeks 100 Days Coding Challenge.",
+    "Solved 450+ problems on GeeksforGeeks.",
+    "Participated in College Hackathon - IEM Kolkata.",
+    "Participated in College Hackathon - NIT Rourkela."
+  ],
+
+  "resume": {
+    "available": true,
+    "path": "/resume.pdf",
+    "title": "Rohan Karak Resume"
+  }
+}
