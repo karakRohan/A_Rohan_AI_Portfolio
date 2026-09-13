@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 
 * {
   box-sizing: border-box;
@@ -584,8 +584,6 @@ nav,
 
   .menu-btn {
     display: block;
-    position: relative;
-    z-index: 1200;
   }
 
   .layout {
@@ -593,19 +591,18 @@ nav,
   }
 
   .sidebar {
-    position: absolute;
+    position: fixed;
     top: 72px;
+    bottom: 0;
     left: -260px;
     width: min(245px, 78vw);
     max-width: 245px;
-    min-height: calc(100vh - 72px);
-    background: rgba(8, 8, 11, 0.97);
+    background: rgba(8, 8, 11, 0.94);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 18px 0 45px rgba(0, 0, 0, 0.28);
-    transition: left .25s ease;
+    transition: left .25s ease, width .25s ease;
     overflow-y: auto;
-    z-index: 1100;
   }
 
   .sidebar.open {
@@ -613,8 +610,6 @@ nav,
   }
 
   .chat {
-    width: 100%;
-    min-width: 0;
     padding: 38px 18px 125px;
   }
 
@@ -653,7 +648,6 @@ nav,
   }
 }
 
-
 /* =========================================
    PROFILE IMAGE FIX
 ========================================= */
@@ -681,4 +675,137 @@ nav,
   object-fit: cover;
   object-position: center;
   border-radius: inherit;
+}
+
+
+/* =========================================
+   INTERACTIVE CURSOR / TOUCH ANIMATION
+========================================= */
+
+.app {
+  --mx: 50%;
+  --my: 18%;
+  --touch-x: 50%;
+  --touch-y: 50%;
+  isolation: isolate;
+}
+
+.app::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      430px circle at var(--mx) var(--my),
+      rgba(139, 92, 246, 0.13),
+      rgba(139, 92, 246, 0.045) 28%,
+      transparent 62%
+    );
+  transition: background-position 0.08s linear;
+}
+
+.app::after {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  left: calc(var(--touch-x) - 105px);
+  top: calc(var(--touch-y) - 105px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(0.35);
+  background: radial-gradient(
+    circle,
+    rgba(74, 222, 128, 0.22) 0%,
+    rgba(74, 222, 128, 0.08) 28%,
+    transparent 68%
+  );
+}
+
+.app.touching::after {
+  animation: touchRipple 0.65s ease-out;
+}
+
+.app > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes touchRipple {
+  0% {
+    opacity: 0.95;
+    transform: scale(0.25);
+  }
+  55% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+.sidebar a,
+.suggestions button,
+.resume-open-btn,
+.send,
+.chat-link,
+.skill-card,
+.about-section,
+.experience-section,
+.profile-card,
+.bubble {
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    color 0.22s ease;
+}
+
+.sidebar a:hover,
+.suggestions button:hover,
+.resume-open-btn:hover,
+.send:hover {
+  transform: translateY(-2px);
+}
+
+.skill-card:hover,
+.about-section:hover,
+.experience-section:hover,
+.profile-card:hover,
+.bubble:hover {
+  transform: translateY(-3px);
+  border-color: #34313f;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.24);
+}
+
+.send:active,
+.suggestions button:active,
+.sidebar a:active,
+.resume-open-btn:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app::before,
+  .app::after,
+  .sidebar a,
+  .suggestions button,
+  .resume-open-btn,
+  .send,
+  .chat-link,
+  .skill-card,
+  .about-section,
+  .experience-section,
+  .profile-card,
+  .bubble {
+    transition: none !important;
+    animation: none !important;
+  }
 }
