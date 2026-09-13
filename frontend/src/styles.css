@@ -595,9 +595,14 @@ nav,
     top: 72px;
     bottom: 0;
     left: -260px;
-    width: 245px;
-    background: #08080b;
-    transition: .25s;
+    width: min(245px, 78vw);
+    max-width: 245px;
+    background: rgba(8, 8, 11, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 18px 0 45px rgba(0, 0, 0, 0.28);
+    transition: left .25s ease, width .25s ease;
+    overflow-y: auto;
   }
 
   .sidebar.open {
