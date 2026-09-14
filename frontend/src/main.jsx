@@ -17,7 +17,8 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const API = "http://localhost:5000";
+// const API = "http://localhost:5000";
+const API = "https://rohan-personal-ai-agent.onrender.com";
 
 const suggestions = [
   "Who is Rohan?",
