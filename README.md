@@ -116,6 +116,9 @@ Rohan_personal_AI_Agent/
 │   └── package-lock.json
 │
 └── README.md
+
+
+ ```
 ⚙️ Local Setup
 1. Clone the Repository
 git clone https://github.com/karakRohan/Rohan_personal_AI_Agent.git
@@ -266,4 +269,4 @@ If you like this project, consider giving the repository a ⭐ on GitHub.
 
 ✨ Eat(). Sleep(). Code(). Repeat(). ✨
 🙏 Trusting God's plan — every step, every decision 🕉️
-<p align="center"> Built with ❤️ by Rohan Karak </p> ```
+<p align="center"> Built with ❤️ by Rohan Karak </p>
