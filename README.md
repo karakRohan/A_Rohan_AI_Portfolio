@@ -1,288 +1,122 @@
-🤖 Rohan AI — Personal AI Portfolio Agent
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React-Vite-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
-  <img src="https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-  <img src="https://img.shields.io/badge/Groq-LLM-F55036?style=for-the-badge" alt="Groq" />
-  <img src="https://img.shields.io/badge/MERN-Stack-000000?style=for-the-badge" alt="MERN" />
-  <img src="https://img.shields.io/badge/Deployed-Vercel%20%7C%20Render-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Deployment" />
-</p>
-
-<p align="center">
-  <strong>An AI-powered personal portfolio that turns a traditional developer profile into an interactive conversational experience.</strong>
-</p>
-
-<p align="center">
-  <a href="https://rohan-personal-ai-agent.vercel.app/">🌐 Live Portfolio</a> •
-  <a href="https://github.com/karakRohan/Rohan_personal_AI_Agent">💻 Repository</a> •
-  <a href="https://leetcode.com/u/Code_Rider42/">🧩 LeetCode</a>
-</p>
-
-✨ Overview
-
-Rohan AI is a full-stack AI portfolio agent built to make a developer portfolio more interactive, informative, and recruiter-friendly.
-
-Instead of relying only on static pages, visitors can ask questions and explore Rohan's professional profile through an AI interface. The application combines a React frontend, an Express backend, a Groq-powered LLM, a structured knowledge base, and live developer-data integrations.
-
-What visitors can explore
-
-💻 Technical skills and core technologies
-
-🚀 Projects and key contributions
-
-🤖 AI / LLM interests and work
-
-🧠 Coding journey and problem-solving progress
-
-🐙 GitHub profile and repository activity
-
-🧩 LeetCode statistics and progress
-
-🎓 Education
-
-💼 Hiring and professional information
-
-📄 Resume and contact information
-
-🎯 Why This Project?
-
-A traditional portfolio mostly shows information. Rohan AI is designed to communicate that information.
-
-The core idea is simple:
-
-Turn a portfolio website into an AI-powered digital representative.
-
-This project explores how conversational AI, live APIs, and modern frontend engineering can work together to create a more engaging developer experience.
-
-🏗️ System Architecture
-
-flowchart TB
-    U[👤 Visitor / Recruiter]
-    FE[🌐 React + Vite Frontend]
-    BE[⚙️ Node.js + Express Backend]
-    KB[📚 knowledge.json\nProfile & Portfolio Knowledge]
-    AI[🤖 Groq LLM\nopenai/gpt-oss-20b]
-    GH[🐙 GitHub REST API]
-    LC[🧩 LeetCode GraphQL API]
-    RES[📄 Resume & Static Assets]
-
-    U --> FE
-    FE -->|Chat / Profile / GitHub / LeetCode| BE
-    BE --> KB
-    BE --> AI
-    BE --> GH
-    BE --> LC
-    FE --> RES
-    AI --> BE
-    GH --> BE
-    LC --> BE
-    BE --> FE
-    FE --> U
-
-Request Flow
-
-Visitor
-   │
-   ▼
-React UI
-   │
-   ▼
-Express API
-   │
-   ├──► knowledge.json ──► Known profile / FAQ answer
-   │
-   ├──► Groq LLM ────────► AI-generated portfolio response
-   │
-   ├──► GitHub API ──────► Live repositories / profile data
-   │
-   └──► LeetCode API ────► Coding statistics / progress
-   │
-   ▼
-React UI
-   │
-   ▼
-Visitor
-
-🧠 AI Response Architecture
-
-The backend is designed to keep portfolio answers grounded in the application's known data before using the LLM for broader conversational responses.
-
-flowchart LR
-    Q[❓ User Question]
-    N[🧹 Normalize Input]
-    P[🔒 Privacy / Safety Check]
-    F[📌 FAQ / Knowledge Match]
-    G[🤖 Groq LLM]
-    R[💬 Final Response]
-
-    Q --> N --> P --> F
-    F -->|Matched| R
-    F -->|No Match| G --> R
-
-This approach helps the agent answer common portfolio questions directly while retaining an AI-powered conversational experience for other supported queries.
-
-🚀 Key Features
-
-🤖 AI Portfolio Chat
-
-Ask natural-language questions about Rohan's professional profile, including:
-
-Skills
-
-Projects
-
-Coding journey
-
-AI / LLM interests
-
-Education
-
-Career goals
-
-Hiring information
-
-⚡ Quick AI Actions
-
-Quick actions provide one-click access to important portfolio questions:
-
-Ask About Skills
-
-Show My Projects
-
-Why Hire Rohan?
-
-Coding Journey
-
-🐙 Live GitHub Dashboard
-
-The backend connects to GitHub to retrieve profile and repository information, allowing the portfolio to present developer activity instead of relying only on manually written static content.
-
-🧩 Live LeetCode Dashboard
-
-The application integrates with LeetCode data to display coding progress and problem-solving activity.
-
-🚀 Projects Showcase
-
-Current featured projects include:
-
-Project
-
-Stack
-
-Focus
-
-Doctor Appointment Web
-
-MERN
-
-Healthcare & appointment management
-
-Text To Image Generator
-
-MERN
-
-AI-powered image generation
-
-Video Calling Chat App
-
-MERN + WebRTC
-
-Real-time communication
-
-📄 Interactive Resume
-
-The portfolio includes resume access with a preview experience so recruiters can quickly review the profile.
-
-💼 Hire Me Section
-
-A dedicated hiring section provides professional contact options for recruiters, companies, and collaboration opportunities.
-
-📱 Responsive UI
-
-The interface is designed for desktop, laptop, tablet, and mobile screens.
-
-🔐 Privacy-Aware Design
-
-The AI experience is structured to avoid exposing private personal information and to focus on relevant professional/public profile details.
-
-🛠️ Technology Stack
-
+# 🤖 Rohan AI — Personal AI Portfolio Agent
+
+> An AI-powered personal portfolio that allows recruiters, developers, and visitors to interact with Rohan through an intelligent conversational experience.
+
+🌐 **Live Portfolio:** https://rohan-personal-ai-agent.vercel.app/
+
+💻 **GitHub:** https://github.com/karakRohan/Rohan_personal_AI_Agent
+
+---
+
+## ✨ About
+
+Rohan AI is a personal AI portfolio built to make a developer portfolio more interactive and engaging.
+
+Instead of only browsing a traditional portfolio, visitors can ask questions and explore Rohan's:
+
+- Technical Skills
+- Projects
+- AI / LLM Interests
+- Coding Journey
+- GitHub Activity
+- LeetCode Progress
+- Education
+- Resume
+- Career & Hiring Information
+
+The goal is to create a portfolio that feels more like an interactive AI product than a traditional website.
+
+---
+
+## 🚀 Features
+
+### 🤖 AI Portfolio Chat
+Ask questions about Rohan's skills, projects, coding journey, experience, and professional profile.
+
+### ⚡ Quick AI Actions
+Quick buttons for common questions such as:
+
+- Ask About Skills
+- Show My Projects
+- Why Hire Rohan?
+- Coding Journey
+
+### 🐙 GitHub Integration
+Fetches GitHub profile and repository information through the GitHub API.
+
+### 🧩 LeetCode Integration
+Displays LeetCode coding progress and problem-solving statistics.
+
+### 🚀 Projects Showcase
+Showcases Rohan's major projects with technologies, descriptions, and contributions.
+
+### 📄 Interactive Resume
+Visitors can preview and access the resume directly from the portfolio.
+
+### 💼 Hire Me
+A dedicated section for recruiters and companies to connect with Rohan.
+
+### 📱 Responsive Design
+Works across desktop, laptop, tablet, and mobile devices.
+
+### 🔐 Privacy-Aware AI
+The AI focuses on relevant professional and public information while protecting private personal details.
+
+---
+
+## 🏗️ Architecture
+
+```text
+                     ┌───────────────────┐
+                     │   👤 Visitor      │
+                     │    / Recruiter    │
+                     └─────────┬─────────┘
+                               │
+                               ▼
+                     ┌───────────────────┐
+                     │  ⚛️ React + Vite │
+                     │     Frontend      │
+                     └─────────┬─────────┘
+                               │
+                               ▼
+                     ┌───────────────────┐
+                     │ ⚙️ Node + Express│
+                     │      Backend      │
+                     └───────┬───────────┘
+                             │
+             ┌───────────────┼────────────────┐
+             │               │                │
+             ▼               ▼                ▼
+      ┌────────────┐  ┌────────────┐  ┌────────────┐
+      │ 📚 Knowledge│  │ 🤖 Groq    │  │ 🌐 APIs    │
+      │    Base     │  │    LLM     │  │            │
+      └────────────┘  └────────────┘  └──────┬─────┘
+                                             │
+                               ┌─────────────┴─────────────┐
+                               ▼                           ▼
+                         🐙 GitHub API              🧩 LeetCode API
+🛠️ Tech Stack
 Frontend
-
-Technology
-
-Purpose
-
 React.js
-
-Component-based UI
-
 Vite
-
-Frontend development and build tooling
-
 JavaScript
-
-Application logic
-
 HTML5
-
-Page structure
-
 CSS3
-
-Responsive styling and animations
-
 Lucide React
-
-Interface icons
-
 Backend
-
-Technology
-
-Purpose
-
 Node.js
-
-Server runtime
-
 Express.js
-
-REST API server
-
 CORS
-
-Cross-origin communication
-
 OpenAI SDK
-
-LLM client interface
-
 Groq API
-
-LLM inference
-
-knowledge.json
-
-Structured portfolio knowledge
-
-External APIs
-
-🐙 GitHub REST API
-
-🧩 LeetCode GraphQL API
-
-🤖 Groq OpenAI-compatible API
-
+APIs
+GitHub REST API
+LeetCode GraphQL API
+Groq API
 Deployment
-
-▲ Vercel — Frontend
-
-☁️ Render — Backend
-
+Vercel — Frontend
+Render — Backend
 📂 Project Structure
-
 Rohan_personal_AI_Agent/
 │
 ├── backend/
@@ -308,51 +142,37 @@ Rohan_personal_AI_Agent/
 │   └── package-lock.json
 │
 └── README.md
-
-⚙️ Local Development
-
+⚙️ Run Locally
 1. Clone the repository
-
 git clone https://github.com/karakRohan/Rohan_personal_AI_Agent.git
-
-2. Enter the project
-
+2. Open the project
 cd Rohan_personal_AI_Agent
-
 3. Install frontend dependencies
-
 cd frontend
 npm install
-
 4. Install backend dependencies
 
 Open another terminal:
 
 cd backend
 npm install
+5. Add environment variables
 
-5. Configure environment variables
-
-Create backend/.env:
+Create a .env file inside backend/.
 
 PORT=5000
 GROQ_API_KEY=YOUR_GROQ_API_KEY
 GROQ_MODEL=openai/gpt-oss-20b
-
-⚠️ Security: Never commit your real API key to GitHub.
-
-6. Start the backend
-
+6. Start backend
 cd backend
 npm start
 
 Backend:
 
 http://localhost:5000
+7. Start frontend
 
-7. Start the frontend
-
-In a second terminal:
+In another terminal:
 
 cd frontend
 npm run dev
@@ -360,18 +180,16 @@ npm run dev
 Frontend:
 
 http://localhost:5173
+🌐 Deployment
+Frontend
 
-🌐 Production Deployment
+Deploy the frontend folder to Vercel.
 
-Frontend — Vercel
+Backend
 
-Deploy the frontend directory to Vercel.
+Deploy the backend folder to Render as a Node.js Web Service.
 
-Backend — Render
-
-Deploy the backend directory as a Node.js Web Service on Render.
-
-After the backend is deployed, update the frontend API base URL in:
+After deploying the backend, update the API URL in:
 
 frontend/src/main.jsx
 
@@ -379,225 +197,88 @@ Example:
 
 const API = "https://your-backend-url.onrender.com";
 
-The deployed frontend should always point to the production backend URL, not http://localhost:5000.
+Do not use http://localhost:5000 in production.
 
 🔑 Environment Variables
-
-The backend uses:
-
+PORT=5000
 GROQ_API_KEY=your_api_key
 GROQ_MODEL=openai/gpt-oss-20b
-PORT=5000
 
-Recommended .gitignore
+⚠️ Never commit .env or expose your API key publicly.
 
-node_modules/
-.env
-.env.local
-.env.*.local
-npm-debug.log*
+💻 Projects
+🏥 Doctor Appointment Web
 
-Never expose API keys, tokens, or other secrets in source code, screenshots, commits, or README files.
+Technology: MERN Stack
 
-🔌 Backend API Overview
+A healthcare platform designed for patients, doctors, and administrators with appointment scheduling, authentication, and role-based access.
 
-Endpoint
+🎨 Text To Image Generator
 
-Purpose
+Technology: MERN Stack
 
-GET /api/health
+An AI-powered application that converts text prompts into images using an image generation API.
 
-Backend health and configuration status
+📹 Video Calling Chat App
 
-GET /api/profile
+Technology: MERN + WebRTC
 
-Portfolio profile data
+A real-time communication application supporting video calling, chat, authentication, and dynamic rooms.
 
-GET /api/github
-
-GitHub profile and repository data
-
-GET /api/leetcode
-
-LeetCode statistics/data
-
-POST /api/chat
-
-AI portfolio conversation
-
-Example health check
-
-GET /api/health
-
-Use this endpoint after deployment to verify that the backend is reachable.
-
-🧩 Core Project Modules
-
-flowchart LR
-    A[Frontend UI]
-    B[Portfolio Sections]
-    C[AI Chat]
-    D[GitHub Dashboard]
-    E[LeetCode Dashboard]
-    F[Resume]
-    G[Hire Me]
-    H[Backend API]
-    I[Knowledge Base]
-    J[External APIs]
-
-    A --> B
-    A --> C
-    A --> D
-    A --> E
-    A --> F
-    A --> G
-    C --> H
-    D --> H
-    E --> H
-    H --> I
-    H --> J
-
-🎯 Project Goals
-
-This project explores the practical combination of:
-
-Full Stack Web Development
-
-Artificial Intelligence
-
-Large Language Models
-
-API Integration
-
-Real-Time Developer Data
-
-Conversational Interfaces
-
-Interactive UI/UX
-
-Portfolio Engineering
-
-The broader goal is to build a portfolio that does more than display information — it should help communicate the developer behind it.
-
-📈 Future Roadmap
-
-Phase 1 — Core AI Portfolio ✅
-
-AI portfolio chat
-
-Portfolio knowledge base
-
-GitHub integration
-
-LeetCode integration
-
-Resume access
-
-Recruiter-focused sections
-
-Phase 2 — Interaction & Discovery 🚧
-
-Smarter follow-up questions
-
-Deeper project exploration
-
-Improved recruiter workflows
-
-Better conversational navigation
-
-Phase 3 — Intelligence & Analytics 🔮
-
-Recruiter Mode
-
-Advanced developer analytics
-
-Interactive technology explorer
-
-AI-powered project recommendations
-
-Phase 4 — Premium Experience 🔮
-
-🎙️ Voice interaction
-
-🌐 Multilingual AI — English, বাংলা, हिन्दी
-
-✨ Premium animations and transitions
-
+🏆 Achievements
+🔥 LeetCode 50 Days Coding Streak
+🔥 LeetCode 100 Days Coding Streak
+🔥 LeetCode 200 Days Coding Streak
+🔥 LeetCode 365 Days Coding Streak
+💻 430+ LeetCode Problems Solved
+🧩 450+ GeeksforGeeks Problems Solved
+🎯 GeeksforGeeks 100 Days Coding Challenge
+🚀 Participated in College Hackathons
+📜 Open Source GitHub Certificate — GDSC
 👨‍💻 About Rohan
 
-Rohan Karak is a Full Stack Developer and AI/ML enthusiast focused on building intelligent, scalable, and user-focused applications.
+Rohan Karak is a Full Stack Developer and AI/ML enthusiast interested in building intelligent, scalable, and user-focused applications.
 
-His technical interests and experience include:
+Skills
+C • C++ • Java • Python
+React.js • Node.js • Express.js
+MongoDB • MySQL • PostgreSQL
+JavaScript • TypeScript
+HTML5 • CSS3
+AI / ML • LLMs • Generative AI
+Data Structures & Algorithms
+Git • GitHub • AWS
 
-MERN Stack • Python • AI/ML • LLMs • Generative AI • REST APIs • Data Structures & Algorithms
+Currently pursuing B.Tech in Computer Science and Engineering.
 
-He is currently pursuing a B.Tech in Computer Science and Engineering and continuously works on software projects, problem-solving, and AI-powered applications.
+🌐 Connect With Me
 
-🏆 Coding & Achievements
-
-🔥 LeetCode 50 Days, 100 Days, 200 Days and 365 Days Coding Streak Badges
-
-💻 430+ LeetCode Problems Solved
-
-🧩 450+ GeeksforGeeks Problems Solved
-
-🎯 GeeksforGeeks 100 Days Coding Challenge
-
-🚀 Participated in College Hackathons at IEM Kolkata and NIT Rourkela
-
-📜 Open Source GitHub Certificate — GDSC
-
-📊 Current Developer Profile
-
-┌──────────────────────────────────────────┐
-│             ROHAN KARAK                   │
-├──────────────────────────────────────────┤
-│ Role        : Full Stack Developer       │
-│ Focus       : AI / LLM / GenAI           │
-│ Education   : B.Tech CSE                 │
-│ GitHub      : karakRohan                 │
-│ LeetCode    : Code_Rider42               │
-│ Projects    : MERN + AI + WebRTC         │
-└──────────────────────────────────────────┘
-
-🌐 Connect With Rohan
-
-Platform
-
-Link
-
-🐙 GitHub
-
+🐙 GitHub:
 https://github.com/karakRohan
 
-💼 LinkedIn
-
+💼 LinkedIn:
 https://www.linkedin.com/in/rohan-karak-9a0b78288/
 
-🌐 Portfolio
-
+🌐 Portfolio:
 https://rohanportfolio-eight.vercel.app/
 
-🧩 LeetCode
-
+🧩 LeetCode:
 https://leetcode.com/u/Code_Rider42/
 
-📚 GeeksforGeeks
-
+📚 GeeksforGeeks:
 https://www.geeksforgeeks.org/profile/rohankarak
 
+📈 Future Improvements
+🎙️ Voice Interaction
+🌐 Multilingual AI
+🎯 Recruiter Mode
+🧠 Smarter AI Follow-ups
+📊 Developer Analytics
+✨ Premium Animations
+🔍 AI Project Exploration
 ⭐ Support
 
-If you find this project interesting, consider giving the repository a ⭐ on GitHub.
-
-Your support helps motivate continued learning, experimentation, and development.
-
-✨ Developer Motto
+If you like this project, consider giving the repository a ⭐ on GitHub.
 
 ✨ Eat(). Sleep(). Code(). Repeat(). ✨
-
 🙏 Trusting God's plan — every step, every decision 🕉️
-
-<p align="center">
-  Built with ❤️, React, Node.js, Groq, APIs, and a lot of curiosity.
-</p>
